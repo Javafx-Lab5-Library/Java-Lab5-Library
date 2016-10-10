@@ -13,6 +13,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -31,6 +32,7 @@ import model.CollectionOfBooks;
 public class AddBookView extends Stage{
     private CollectionOfBooks books;
     private Controller controller;
+    private Alert alert = new Alert(Alert.AlertType.INFORMATION);
     
     private Label titleL;
     private Label isbnL;
@@ -108,6 +110,7 @@ public class AddBookView extends Stage{
         editionL = new Label("Edition:");
         priceL = new Label("Price:");
         authorL = new Label("Author:");
+        setBlackLabels();
 
         title = new TextField();
         isbn = new TextField();
@@ -125,29 +128,39 @@ public class AddBookView extends Stage{
         cancel = new Button("Cancel");
     }
     
-    private void clearFields() {
+    public void clearFields() {
         title.clear();
         isbn.clear();
         edition.clear();
         price.clear();
         author.clear();
+    }
+    
+    public void setBlackLabels() {
+        titleL.setTextFill(Color.BLACK);
+        isbnL.setTextFill(Color.BLACK);
         editionL.setTextFill(Color.BLACK);
         priceL.setTextFill(Color.BLACK);
+        authorL.setTextFill(Color.BLACK);
     }
     
-    public void setPriceRed() {
-        priceL.setTextFill(Color.RED);
+    public void setRedLabels(int index) {
+        if (index == 0)
+            titleL.setTextFill(Color.RED);
+        else if (index == 1)
+            isbnL.setTextFill(Color.RED);
+        else if (index == 2)
+            editionL.setTextFill(Color.RED);
+        else if (index == 3)
+            priceL.setTextFill(Color.RED);
+        else if (index == 4)
+            authorL.setTextFill(Color.RED);
     }
     
-    public void setEditionRed() {
-        editionL.setTextFill(Color.RED);
-    }
     
     public void addBook() {
         clearFields();
-        this.show();
-        
-
+        this.show(); 
     }
     
     public List<String> getInfo() {
@@ -161,8 +174,20 @@ public class AddBookView extends Stage{
         return tmp;
     }
     
+    public void exitStage() {
+        clearFields();
+        this.hide();
+    }
+    
+    public void showAlert() {
+        alert.setHeaderText("");
+        alert.setTitle("Alert!");
+        alert.setContentText("Make sure you fill all fields!\n"
+                + "Make sure Edition and Price are Positive numbers!");
+        alert.show();
+    }
+    
     private void addEventHandlers() {
-        System.out.println("wwwwwwwwBookView");
         addBook.setOnAction(new EventHandler<ActionEvent>() {
             @Override 
             public void handle(ActionEvent event) {
@@ -170,9 +195,16 @@ public class AddBookView extends Stage{
                 System.out.println("IN AddBookView");
                 controller.handleInput();
                 //books.addBook(new Book("gfhgh", "54", 9, 8, new Author("hj")));
-                
             }
-            
+        });
+        
+        cancel.setOnAction(new EventHandler<ActionEvent>() {
+            @Override 
+            public void handle(ActionEvent event) {
+                System.out.println("IN AddBookView");
+                controller.handleCancel();
+                //books.addBook(new Book("gfhgh", "54", 9, 8, new Author("hj")));
+            }
         });
     }
     

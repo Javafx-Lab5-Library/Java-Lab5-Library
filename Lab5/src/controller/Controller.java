@@ -43,37 +43,53 @@ public class Controller {
     }
     
     public boolean handleInput() {
+        addBookView.setBlackLabels();
         List<String> tmp = addBookView.getInfo();
-        Double price;
-        int edition;
+        Boolean error = false;
+        Double price = 0.0;
+        int edition = 0;
         for (int i = 0; i < 5; i++) {
             if (tmp.get(i).length() <= 0) {
-                // alert empty field
-                System.out.println("alertalertalert");
-                return false;
+                addBookView.setRedLabels(i);
+                error = true;
             }
         }
         
         try {
             edition = Integer.parseInt(tmp.get(2));
+            if (edition < 0) {
+                addBookView.setRedLabels(2);
+                error = true;
+            }
         }
         catch(NumberFormatException e) {
-            // alert message
-            addBookView.setEditionRed();
-            return false;
+            addBookView.setRedLabels(2);
+            error = true;
         }
         try {
             price = Double.parseDouble(tmp.get(3));
+            if (price < 0) {
+                addBookView.setRedLabels(3);
+                error = true;
+            }
         }
         catch(NumberFormatException e) {
-            // alert message
-            addBookView.setPriceRed();
+            addBookView.setRedLabels(3);
+            error = true;
+        }
+        if (error) {
+            addBookView.showAlert();
             return false;
         }
-        // check for empty fields
-
-        books.addBook(new Book(tmp.get(0), tmp.get(1), edition, price, new Author(tmp.get(4))));
-        return true;
+        else {
+            books.addBook(new Book(tmp.get(0), tmp.get(1), edition, price, new Author(tmp.get(4))));
+            addBookView.exitStage();
+            return true;
+        }
+    }
+    
+    public void handleCancel() {
+        addBookView.exitStage();
     }
     
     public void addBook() {
