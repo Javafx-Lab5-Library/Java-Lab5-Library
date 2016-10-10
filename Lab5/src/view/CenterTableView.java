@@ -9,6 +9,7 @@ package view;
 import model.Author;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import model.Book;
 import model.CollectionOfBooks;
@@ -16,6 +17,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 /**
  *
@@ -23,6 +25,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class CenterTableView extends TableView {
     private ObservableList<Book> observBooks;
+    private CollectionOfBooks books;
     private TableColumn title;
     private TableColumn isbn;
     private TableColumn edition;   
@@ -31,16 +34,15 @@ public class CenterTableView extends TableView {
     private TableColumn emailCol;
     
     public CenterTableView (CollectionOfBooks books) {
-        //ArrayList<Book> test = new ArrayList();
-        //LinkedList<Book> test2 = new LinkedList();
-        //observBooks = FXCollections.observableArrayList(test2);
-        observBooks = FXCollections.observableArrayList(
+        this.books = books;
 
                 
-            new Book("qwe", "214124", 3, 4, new Author("qwe")),
-            new Book("asd", "234625", 4, 5, new Author("asdasdasd")),
-            new Book("zxc", "423454", 6, 6, new Author("zxczxczxczxczxc"))
-        );
+        books.addBook(new Book("wer", "214124", 3, 4, new Author("qwe")));
+        books.addBook(new Book("sdf", "234625", 4, 5, new Author("asd")));
+        books.addBook(new Book("xcv", "423454", 6, 6, new Author("zxc")));
+        //);
+        //test = books.getRealList();
+        //observBooks = FXCollections.observableArrayList(books.getRealList());
         
         initView();
     }
@@ -70,6 +72,9 @@ public class CenterTableView extends TableView {
             new PropertyValueFactory<Book, Double>("price"));
         author.setCellValueFactory(
             new PropertyValueFactory<Book, Author>("author"));
-        this.setItems(observBooks);               
+        this.setItems(books.getRealList());   
+        
+        
+        
     }    
 }

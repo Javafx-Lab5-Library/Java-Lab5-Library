@@ -2,42 +2,54 @@ package model;
 
 
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Collections;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 
 /**
- * A CollectionOfBooks contains a LinkedList of <code>Book</code> objects.
+ * A CollectionOfBooks contains a ArrayList of <code>Book</code> objects.
  * The list can be manipulated by adding and removing <code>Book</code> objects.
  * 
  * @author Niklas Ålander
  * @version 1.0
  */
 public class CollectionOfBooks {
-	private LinkedList<Book> books;
+	//private ArrayList<Book> books;
+        private ObservableList<Book> books;
 
 	/**
-	* Constructs a new LinkedList of <code>Book</code> objects.
+	* Constructs a new ArrayList of <code>Book</code> objects.
 	*/
 	public CollectionOfBooks() {
-		books = new LinkedList<Book>();
+		//books = new ArrayList<Book>();
+                books = FXCollections.observableArrayList();
 	}
 
 	/**
-	* Constructs a LinkedList of <code>Book</code> objects.
+	* Constructs a ArrayList of <code>Book</code> objects.
 	* @param books The new list of <code>Book</code>.
 	*/
-	public CollectionOfBooks(LinkedList<Book> books) {
+	/*public CollectionOfBooks(ArrayList<Book> books) {
 		this.books = books;
 	}
 
-	public void setBooks(LinkedList<Book> books) {
+	public void setBooks(ArrayList<Book> books) {
 		this.books = books;
+	}
+
+	public ArrayList<Book> getList() {
+		return (ArrayList<Book>) books.clone();
+	}*/
+
+	public ObservableList<Book> getRealList() {
+		return (ObservableList<Book>) books;
 	}
 
 	/**
@@ -127,7 +139,7 @@ public class CollectionOfBooks {
 	public Author findAuthor(String name) {
 		Author tmpAuthor = new Author(name);
 		for (Book b : books) {
-			LinkedList<Author> tmpList = b.getAuthors();
+			ArrayList<Author> tmpList = b.getAuthors();
 			for (Author a : tmpList) {
 				if (a.compareTo(tmpAuthor) == 0) {
 					return a;
@@ -144,8 +156,8 @@ public class CollectionOfBooks {
 	* @param isbn The <code>isbn</code> that is being searched.
 	* @return Returns the list of books that had matching isbns.
 	*/
-	public LinkedList<Book> searchByIsbn(String isbn) {
-		LinkedList<Book> tmpBookList = new LinkedList<Book>();
+	public ArrayList<Book> searchByIsbn(String isbn) {
+		ArrayList<Book> tmpBookList = new ArrayList<Book>();
 		CharSequence tmpIsbn = isbn.toUpperCase();
 		for (Book b : books) {
 			if (b.getIsbn().toUpperCase().contains(tmpIsbn))
@@ -162,8 +174,8 @@ public class CollectionOfBooks {
 	* @param title The <code>title</code> that is being searched.
 	* @return Returns the list of books that had matching titles.
 	*/
-	public LinkedList<Book> searchByTitle(String title) {
-		LinkedList<Book> tmpBookList = new LinkedList<Book>();
+	public ArrayList<Book> searchByTitle(String title) {
+		ArrayList<Book> tmpBookList = new ArrayList<Book>();
 		CharSequence tmpTitle = title.toUpperCase();
 		for (Book b : books) {
 			if (b.getTitle().toUpperCase().contains(tmpTitle))
@@ -180,12 +192,12 @@ public class CollectionOfBooks {
 	* @param name The <code>Author</code> that is being searched.
 	* @return Returns the list of books that had matching Authors.
 	*/
-	public LinkedList<Book> searchByAuthor(String name) {
-		LinkedList<Book> tmpBookList = new LinkedList<Book>();
+	public ArrayList<Book> searchByAuthor(String name) {
+		ArrayList<Book> tmpBookList = new ArrayList<Book>();
 		CharSequence tmpName = name.toUpperCase();
 		Author tmpAuthor = new Author(name);
 		for (Book b : books) {
-			LinkedList<Author> tmpList = b.getAuthors();
+			ArrayList<Author> tmpList = b.getAuthors();
 			for (Author a : tmpList) {
 				if (a.getName().toUpperCase().contains(tmpName)) {
 					tmpBookList.add(b);
@@ -203,9 +215,9 @@ public class CollectionOfBooks {
 	* @throws IOException If a file is not found to read from.
 	* @throws ClassNotFoundException If a class is not found to read in to.
 	*/
-	public void readFromFile(ObjectInputStream input) throws IOException, ClassNotFoundException {
-		books = (LinkedList<Book>) input.readObject();
-	}
+	/*public void readFromFile(ObjectInputStream input) throws IOException, ClassNotFoundException {
+		books = (ArrayList<Book>) input.readObject();
+	}*/
 
 	/**
 	* Writes to a file to save a list of <code>Book</code> when program is closed.

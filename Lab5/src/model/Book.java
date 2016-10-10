@@ -1,6 +1,6 @@
 package model;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.io.Serializable;
 import java.util.Comparator;
 import javafx.beans.property.SimpleStringProperty;
@@ -21,7 +21,7 @@ public class Book implements Serializable {
         //private SimpleStringProperty isbn;
 	private int edition;
 	private double price;
-	private LinkedList<Author> authors;
+	private ArrayList<Author> authors;
 
 	/**
 	* Creates a new <code>Book</code>.
@@ -38,7 +38,7 @@ public class Book implements Serializable {
                 this.isbn = isbn;
 		this.edition = edition;
 		this.price = price;
-		authors = new LinkedList<Author>();
+		authors = new ArrayList<Author>();
 		authors.add(author);
 	}
 
@@ -88,8 +88,8 @@ public class Book implements Serializable {
 	* @return Creates a <code>clone</code> of the list of 
 	* <code>Author</code>s of the <code>Book</code> to be returned.
 	*/
-	public LinkedList<Author> getAuthors() {
-		return (LinkedList<Author>) authors.clone();
+	public ArrayList<Author> getAuthors() {
+		return (ArrayList<Author>) authors.clone();
 	}
 
 	/**

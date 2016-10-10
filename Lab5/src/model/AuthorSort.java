@@ -2,7 +2,7 @@ package model;
 
 import java.util.Comparator;
 import java.util.Collections;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 /**
  * authorComp takes the first <code>Author</code> of two <code>Book</code>s and compares them.
@@ -26,8 +26,8 @@ public class AuthorSort implements Comparator<Book> {
 	@Override
 	public int compare(Book b1, Book b2) {
 
-		LinkedList<Author> a1 = b1.getAuthors();
-		LinkedList<Author> a2 = b2.getAuthors();
+		ArrayList<Author> a1 = b1.getAuthors();
+		ArrayList<Author> a2 = b2.getAuthors();
 		Collections.sort(a1, new AuthorSort2());
 		Collections.sort(a2, new AuthorSort2());
 

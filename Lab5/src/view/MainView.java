@@ -5,6 +5,7 @@
  */
 package view;
 
+import controller.Controller;
 import model.CollectionOfBooks;
 import javafx.scene.layout.BorderPane;
 
@@ -14,16 +15,18 @@ import javafx.scene.layout.BorderPane;
  */
 public class MainView extends BorderPane {
     private CollectionOfBooks books;
+    private Controller controller;
     private BottomGridPane bottomGrid;
     private CenterTableView centerTable;
     
     public MainView(CollectionOfBooks books) {
         this.books = books;
-        initView(books);
+        controller = new Controller(books, this);
+        initView();
     }
     
-    private void initView(CollectionOfBooks books) {
-        bottomGrid = new BottomGridPane(books);
+    private void initView() {
+        bottomGrid = new BottomGridPane(books, controller);
         centerTable = new CenterTableView(books);
         this.setPrefSize(500, 350);
         this.setCenter(centerTable);
