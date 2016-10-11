@@ -139,7 +139,7 @@ public class CollectionOfBooks {
 	public Author findAuthor(String name) {
 		Author tmpAuthor = new Author(name);
 		for (Book b : books) {
-			ArrayList<Author> tmpList = b.getAuthors();
+			ArrayList<Author> tmpList = b.getsAuthors();
 			for (Author a : tmpList) {
 				if (a.compareTo(tmpAuthor) == 0) {
 					return a;
@@ -197,7 +197,7 @@ public class CollectionOfBooks {
 		CharSequence tmpName = name.toUpperCase();
 		Author tmpAuthor = new Author(name);
 		for (Book b : books) {
-			ArrayList<Author> tmpList = b.getAuthors();
+			ArrayList<Author> tmpList = b.getsAuthors();
 			for (Author a : tmpList) {
 				if (a.getName().toUpperCase().contains(tmpName)) {
 					tmpBookList.add(b);

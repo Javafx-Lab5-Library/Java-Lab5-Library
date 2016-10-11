@@ -26,8 +26,8 @@ public class AuthorSort implements Comparator<Book> {
 	@Override
 	public int compare(Book b1, Book b2) {
 
-		ArrayList<Author> a1 = b1.getAuthors();
-		ArrayList<Author> a2 = b2.getAuthors();
+		ArrayList<Author> a1 = b1.getsAuthors();
+		ArrayList<Author> a2 = b2.getsAuthors();
 		Collections.sort(a1, new AuthorSort2());
 		Collections.sort(a2, new AuthorSort2());
 

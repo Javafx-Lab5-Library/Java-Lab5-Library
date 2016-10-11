@@ -16,21 +16,21 @@ import javafx.scene.layout.BorderPane;
 public class MainView extends BorderPane {
     private CollectionOfBooks books;
     private Controller controller;
-    private BottomGridPane bottomGrid;
+    private BottomHboxView bottomHbox;
     private CenterTableView centerTable;
     
     public MainView(CollectionOfBooks books) {
         this.books = books;
-        controller = new Controller(books, this);
         initView();
     }
     
     private void initView() {
-        bottomGrid = new BottomGridPane(books, controller);
         centerTable = new CenterTableView(books);
+        controller = new Controller(this, books, centerTable);
+        bottomHbox = new BottomHboxView(books, controller);
         this.setPrefSize(500, 350);
         this.setCenter(centerTable);
-        this.setBottom(bottomGrid);
+        this.setBottom(bottomHbox);
         
     }
 }

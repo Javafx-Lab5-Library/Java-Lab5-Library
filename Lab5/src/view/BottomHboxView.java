@@ -14,23 +14,26 @@ import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import model.CollectionOfBooks;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
 /**
  *
  * @author Niklas
  */
-public class BottomGridPane extends GridPane {
+public class BottomHboxView extends HBox {
     private CollectionOfBooks books;
     private Controller controller;
     private Button addBook;
     private Button removeBook;
-    private Button tempOne;
-    private Button tempTwo;
+    private Button loanBook;
+    private Button refresh;
 
-    BottomGridPane(CollectionOfBooks books, Controller controller) {
+    BottomHboxView(CollectionOfBooks books, Controller controller) {
+        super(30);
         this.books = books;
         this.controller = controller;
         initView(books);
@@ -38,31 +41,38 @@ public class BottomGridPane extends GridPane {
     }
     
     private void initView(CollectionOfBooks books) {
-        this.setPadding(new Insets(5, 20, 5, 40));
-        this.setVgap(15);
-        this.setHgap(40);
+        this.setAlignment(Pos.CENTER);
+        this.setPadding(new Insets(5, 10, 5, 10));
+        
         addBook = new Button("Add Book");
         removeBook = new Button("Remove Book");
-        tempOne = new Button("temp One");
-        tempTwo = new Button("temp two");
-        //GridPane.setHalignment(addBook, HPos.RIGHT);
-        this.add(addBook, 0, 0);
-        this.add(removeBook, 1, 0);
-        this.add(tempOne, 2, 0);
-        this.add(tempTwo, 3, 0);
+        loanBook = new Button("Loan Book");
+        refresh = new Button("Refresh");
+
+        this.getChildren().addAll(addBook, removeBook, loanBook, refresh);
     }
     
     private void addEventHandlers(CollectionOfBooks books) {
-        addBook.setOnAction(new EventHandler<ActionEvent>() {
+        
+        
+        addBook.setOnAction(e -> controller.addBook());
+        /*addBook.setOnAction(new EventHandler<ActionEvent>() {
             @Override 
             public void handle(ActionEvent event) {
                 controller.addBook();
-                System.out.println("IN GRID TEST");
-                //books.addBook(new Book("gfhgh", "54", 9, 8, new Author("hj")));
-                
+                System.out.println("ADD IN GRID TEST");
             }
-            
+        });*/
+        
+        removeBook.setOnAction(new EventHandler<ActionEvent>() {
+            @Override 
+            public void handle(ActionEvent event) {
+                controller.removeBook();
+                System.out.println("REMOVE IN GRID TEST");
+            }
         });
+        
+        
     }
 }
 

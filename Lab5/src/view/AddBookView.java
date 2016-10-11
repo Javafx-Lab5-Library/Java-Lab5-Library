@@ -53,55 +53,31 @@ public class AddBookView extends Stage{
     private BorderPane border;
     
     public AddBookView(CollectionOfBooks books, Controller controller) {
-        super();
+        //super();
         this.books = books;
         this.controller = controller;
         initView();
     }
     
     private void initView() {
-        
-       // this.initModality(Modality.WINDOW_MODAL);
-
+        // create new labels, textfields and buttons
         initFields();
         clearFields();
         
-        grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(5, 20, 5, 20));
+        // create new gridpane
+        initGridPane();
         
-        grid.add(titleL, 0, 0);
-        grid.add(isbnL, 0, 1);
-        grid.add(editionL, 0, 2);
-        grid.add(priceL, 0, 3);
-        grid.add(authorL, 0, 4);
+        // create new hbox
+        initHbox();
         
-        grid.add(title, 1, 0);
-        grid.add(isbn, 1, 1);
-        grid.add(edition, 1, 2);
-        grid.add(price, 1, 3);
-        grid.add(author, 1, 4);
-        
-        hBox = new HBox(5);
-        hBox.setAlignment(Pos.CENTER);
-        hBox.setPadding(new Insets(10, 10, 10, 10));
-        hBox.getChildren().addAll(addBook, cancel);
+        // create new borderpane
+        initBorderPane();
 
-        border = new BorderPane();
-        border.setCenter(grid);
-        border.setBottom(hBox);
-        
-        //event handerls
+        //event handerls for this stage
         addEventHandlers();
-        System.out.println("ddsfsdfIN AddBookView");
         
-        Scene scene = new Scene(border);
-        this.setResizable(false);
-        this.setTitle("Add a new Book");
-        this.setScene(scene);
-        //this.requestFocus();
-        this.show();
+        // create the new stage
+        initStage();
     }
     
     private void initFields() {
@@ -136,6 +112,48 @@ public class AddBookView extends Stage{
         author.clear();
     }
     
+    private void initGridPane() {
+        grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(5, 20, 5, 20));
+        
+        grid.add(titleL, 0, 0);
+        grid.add(isbnL, 0, 1);
+        grid.add(editionL, 0, 2);
+        grid.add(priceL, 0, 3);
+        grid.add(authorL, 0, 4);
+        
+        grid.add(title, 1, 0);
+        grid.add(isbn, 1, 1);
+        grid.add(edition, 1, 2);
+        grid.add(price, 1, 3);
+        grid.add(author, 1, 4);
+    }
+    
+    private void initHbox() {
+        hBox = new HBox(10);
+        hBox.setAlignment(Pos.CENTER);
+        hBox.setPadding(new Insets(10, 10, 10, 10));
+        hBox.getChildren().addAll(addBook, cancel);
+    }
+    
+    private void initBorderPane() {
+        border = new BorderPane();
+        border.setCenter(grid);
+        border.setBottom(hBox);
+    }
+    
+    private void initStage() {
+        Scene scene = new Scene(border);
+        // user can't interact with any other stage
+        this.initModality(Modality.APPLICATION_MODAL);
+        this.setResizable(true);
+        this.setTitle("Add a new Book");
+        this.setScene(scene);
+        this.show();
+    }
+    
     public void setBlackLabels() {
         titleL.setTextFill(Color.BLACK);
         isbnL.setTextFill(Color.BLACK);
@@ -157,12 +175,6 @@ public class AddBookView extends Stage{
             authorL.setTextFill(Color.RED);
     }
     
-    
-    public void addBook() {
-        clearFields();
-        this.show(); 
-    }
-    
     public List<String> getInfo() {
         List<String> tmp = new ArrayList();
         tmp.add(title.getText().trim());
@@ -176,7 +188,7 @@ public class AddBookView extends Stage{
     
     public void exitStage() {
         clearFields();
-        this.hide();
+        this.close();
     }
     
     public void showAlert() {
@@ -191,7 +203,6 @@ public class AddBookView extends Stage{
         addBook.setOnAction(new EventHandler<ActionEvent>() {
             @Override 
             public void handle(ActionEvent event) {
-                //controller.addBook();
                 System.out.println("IN AddBookView");
                 controller.handleInput();
                 //books.addBook(new Book("gfhgh", "54", 9, 8, new Author("hj")));

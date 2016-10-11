@@ -15,7 +15,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.FileNotFoundException;
-
+/*
 public class UserInterface {
 
 	private String fileName;
@@ -286,4 +286,4 @@ public class UserInterface {
 			}
 		}	
 	}
-}
+}*/

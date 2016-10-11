@@ -16,9 +16,7 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class Book implements Serializable {
 	private String title;
-        //private SimpleStringProperty title;
 	private String isbn;
-        //private SimpleStringProperty isbn;
 	private int edition;
 	private double price;
 	private ArrayList<Author> authors;
@@ -40,6 +38,7 @@ public class Book implements Serializable {
 		this.price = price;
 		authors = new ArrayList<Author>();
 		authors.add(author);
+                authors.add(new Author("another"));
 	}
 
 	/**
@@ -73,14 +72,18 @@ public class Book implements Serializable {
 	public int getEdition() {
 		return edition;
 	}
+        
+        public void setEdition(int edition) {
+            this.edition = edition;
+        }
 
-	/**
-	* Returns the <code>price</code> of the <code>Book</code>.
-	* @return Returns the <code>price</code> of the <code>Book</code>.
-	*/
 	public double getPrice() {
 		return price;
 	}
+        
+        public void setPrice(double price) {
+            this.price = price;
+        }
 
 	/**
 	* Creates a <code>clone</code> of the list of <code>Author</code>s 
@@ -88,9 +91,23 @@ public class Book implements Serializable {
 	* @return Creates a <code>clone</code> of the list of 
 	* <code>Author</code>s of the <code>Book</code> to be returned.
 	*/
-	public ArrayList<Author> getAuthors() {
+	public ArrayList<Author> getsAuthors() {
 		return (ArrayList<Author>) authors.clone();
 	}
+        
+	/**
+	* Creates a <code>String</code> of the list of <code>Author</code>s 
+	* of the <code>Book</code> to be returned.
+	* @return Creates a <code>String</code> of the list of 
+	* <code>Author</code>s of the <code>Book</code> to be returned.
+	*/
+        public String getAuthors() {
+            String tmp = new String("");
+            for (Author a : authors) {
+                tmp += a.getName() + ", ";
+            }
+            return tmp;
+        }
 
 	/**
 	* Creates a new <code>Author</code> and adds it to the list.
