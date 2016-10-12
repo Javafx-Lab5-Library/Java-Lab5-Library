@@ -5,14 +5,29 @@
  */
 
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.CollectionOfBooks;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import view.MainView;
 
@@ -28,17 +43,19 @@ public class Main extends Application {
         MainView view = new MainView(books, primaryStage);
         
         /*Button btn = new Button();
-        btn.setText("Say 'Hello World'");
+        btn.setText("read from file");
         btn.setOnAction(new EventHandler<ActionEvent>() {
             
             @Override
             public void handle(ActionEvent event) {
+                try {
+                    readFile(books, stage);
+                } catch (IOException ex) {
+                    System.out.println("shit happned");
+                }
                 System.out.println("Hello World!");
             }
         });*/
-        
-        //StackPane root = new StackPane();
-       // root.getChildren().add(btn);
         
         Scene scene = new Scene(view);
         

@@ -5,11 +5,14 @@
  */
 package externalfile;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import model.Book;
 import model.CollectionOfBooks;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -17,28 +20,43 @@ import java.util.LinkedList;
  * @author Niklas
  */
 public class SaveAndLoad {
+        private CollectionOfBooks books;
     
-	public SaveAndLoad() {
-		
+	public SaveAndLoad(CollectionOfBooks books) {
+            this.books = books;
 	}
 
-	/**
-	* Reads from a file to load a list of <code>Book</code> into a new <code>CollectionOfBooks</code>.
-	* @param input Contains an ObjectInputStream of the file to be read.
-	* @throws IOException If a file is not found to read from.
-	* @throws ClassNotFoundException If a class is not found to read in to.
-	*/
-	public LinkedList<Book> readFromFile(ObjectInputStream input) throws IOException, ClassNotFoundException {
-		return (LinkedList<Book>) input.readObject();
+        public void objectInput(String path) {
+            ObjectInputStream inputFile = null;
+            try {
+                    inputFile = new ObjectInputStream(new FileInputStream(path));	
+                    books.setBooks(readFromFile(inputFile));
+            }
+            catch (Exception e) {
+                    System.out.println("Could not read file into object");
+            }
+        }
+        
+        public void objectOutput(String path) {         
+            ObjectOutputStream outputFile = null;
+            try {
+                    System.out.println("1");
+                    outputFile = new ObjectOutputStream(new FileOutputStream(path));	
+                    System.out.println("2");
+                    
+                    saveToFile(outputFile);
+            }
+            catch (Exception e) {
+                    System.out.println("Could not read file into object");
+            }
+        }      
+
+	public ArrayList<Book> readFromFile(ObjectInputStream input) throws IOException, ClassNotFoundException {
+		return (ArrayList<Book>) input.readObject();
 	}
 
-	/**
-	* Writes to a file to save a list of <code>Book</code> when program is closed.
-	* @param output Contains an ObjectOutputStream of the file that will be written to.
-	* @throws IOException If a file is not found to write to.
-	*/
-	public void writeToFile(ObjectOutputStream output, CollectionOfBooks books) throws IOException {
-		output.writeObject(books);
+	public void saveToFile(ObjectOutputStream output) throws IOException {
+		output.writeObject(books.getRealList());
 	}
 
     

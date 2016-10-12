@@ -29,6 +29,7 @@ import javafx.util.Callback;
  */
 public class CenterTableView extends TableView {
     private CollectionOfBooks books;
+    private ObservableList<Book> observBooks;
     private TableColumn title;
     private TableColumn isbn;
     private TableColumn edition;   
@@ -45,7 +46,7 @@ public class CenterTableView extends TableView {
         books.addBook(new Book("xcv", "423454", 6, 6, new Author("zxc")));
 
         //test = books.getRealList();
-        //observBooks = FXCollections.observableArrayList(books.getRealList());
+        observBooks = FXCollections.observableArrayList(books.getRealList());
         
         initView();
     }
@@ -89,7 +90,9 @@ public class CenterTableView extends TableView {
             new PropertyValueFactory<Book, Double>("price"));
         author.setCellValueFactory(
             new PropertyValueFactory<Book, ArrayList<Author>>("authors"));
-        this.setItems(books.getRealList());   
+        //observBooks = books.getRealList();
+        //this.setItems(books.getRealList());
+        refresh();
     }    
     
     public void setSearchedList(ArrayList<Book> tmpBooks) {
@@ -99,7 +102,10 @@ public class CenterTableView extends TableView {
     }
     
     public void refresh() {
-        this.setItems(books.getRealList());
+        observBooks = FXCollections.observableArrayList(books.getRealList());
+        this.setItems(observBooks);
     }
 
+    
+    
 }

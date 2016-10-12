@@ -33,7 +33,7 @@ public class MainView extends VBox {
     
     private void initView(Stage stage) {
         centerTable = new CenterTableView(books);
-        fileChooser = new FileChooserView(books, stage);
+        fileChooser = new FileChooserView(stage);
         controller = new Controller(this, books, centerTable, fileChooser);
         bottomHbox = new BottomHboxView(books, controller);
         searchField = new SearchFieldView(books, controller);
@@ -43,7 +43,5 @@ public class MainView extends VBox {
         this.setAlignment(Pos.CENTER);
         this.setPadding(new Insets(5, 10, 5, 10));
         this.getChildren().addAll(menuField, searchField, centerTable, bottomHbox);
-    
-        
     }
 }

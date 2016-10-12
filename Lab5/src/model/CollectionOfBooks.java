@@ -22,14 +22,14 @@ import javafx.collections.ObservableList;
  */
 public class CollectionOfBooks {
 	//private ArrayList<Book> books;
-        private ObservableList<Book> books;
+        private ArrayList<Book> books;
 
 	/**
 	* Constructs a new ArrayList of <code>Book</code> objects.
 	*/
 	public CollectionOfBooks() {
-		//books = new ArrayList<Book>();
-                books = FXCollections.observableArrayList();
+		books = new ArrayList<Book>();
+                //books = FXCollections.observableArrayList();
 	}
 
 	/**
@@ -38,7 +38,7 @@ public class CollectionOfBooks {
 	*/
 	/*public CollectionOfBooks(ArrayList<Book> books) {
 		this.books = books;
-	}
+	}*/
 
 	public void setBooks(ArrayList<Book> books) {
 		this.books = books;
@@ -46,10 +46,10 @@ public class CollectionOfBooks {
 
 	public ArrayList<Book> getList() {
 		return (ArrayList<Book>) books.clone();
-	}*/
+	}
 
-	public ObservableList<Book> getRealList() {
-		return (ObservableList<Book>) books;
+	public ArrayList<Book> getRealList() {
+		return (ArrayList<Book>) books;
 	}
 
 	/**
@@ -216,7 +216,7 @@ public class CollectionOfBooks {
 	* @throws ClassNotFoundException If a class is not found to read in to.
 	*/
 	public void readFromFile(ObjectInputStream input) throws IOException, ClassNotFoundException {
-		books = (ObservableList<Book>) input.readObject();
+		books = (ArrayList<Book>) input.readObject();
 	}
 
 	/**

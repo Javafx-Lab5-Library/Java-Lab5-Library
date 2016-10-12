@@ -6,6 +6,8 @@
 package view;
 
 import controller.Controller;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -17,6 +19,9 @@ import javafx.scene.control.MenuItem;
 public class MenuFieldView extends MenuBar{
     private Controller controller;
     private Menu menu;
+    private MenuItem save;
+    private MenuItem load;
+    private MenuItem exit;
     
     public MenuFieldView(Controller controller) {
         super();
@@ -26,11 +31,37 @@ public class MenuFieldView extends MenuBar{
 
     private void initView() {
         Menu menu = new Menu("File");
-        menu.getItems().add(new MenuItem("Save"));
-        menu.getItems().add(new MenuItem("Load"));
-        menu.getItems().add(new MenuItem("Exit"));
-        
+        save = new MenuItem("Save");
+        load = new MenuItem("Load");
+        exit = new MenuItem("Exit");
+        menu.getItems().add(save);
+        menu.getItems().add(load);
+        menu.getItems().add(exit);
         this.getMenus().addAll(menu);
+        
+        addActionHandlers();
+    }
+    
+    private void addActionHandlers() {
+        save.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                controller.saveToFile();
+            }
+        });
+        
+ 
+        
+        
+        
+        
+        load.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                controller.loadFromFile();
+            }
+        });
+        
     }
     
     

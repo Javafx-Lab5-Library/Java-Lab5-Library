@@ -5,22 +5,16 @@
  */
 package controller;
 
+import externalfile.SaveAndLoad;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.List;
-import java.util.Optional;
-import javafx.application.Platform;
-import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar.ButtonData;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextInputDialog;
-import javafx.scene.layout.GridPane;
-import javafx.util.Pair;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import model.Author;
 import model.Book;
 import model.CollectionOfBooks;
@@ -39,13 +33,16 @@ public class Controller {
     private AddBookView addBookView;
     private CenterTableView centerTableView;
     private FileChooserView fileChooserView;
+    private SaveAndLoad saveAndLoad;
     private Alert alert = new Alert(Alert.AlertType.INFORMATION);
     
-    public Controller(MainView mainView, CollectionOfBooks books, CenterTableView centerTableView, FileChooserView fileChooserView) {
+    public Controller(MainView mainView, CollectionOfBooks books, 
+            CenterTableView centerTableView, FileChooserView fileChooserView) {
         this.books = books;
         this.mainView = mainView;
         this.centerTableView = centerTableView;
         this.fileChooserView = fileChooserView;
+        saveAndLoad = new SaveAndLoad(books);
         
     }
     
@@ -94,6 +91,7 @@ public class Controller {
         }
         else {
             books.addBook(new Book(tmp.get(0), tmp.get(1), edition, price, new Author(tmp.get(4))));
+            centerTableView.refresh();
             addBookView.exitStage();
             return true;
         }
@@ -121,8 +119,16 @@ public class Controller {
     
     public void refresh() throws IOException {
         centerTableView.refresh();
-        fileChooserView.saveFile();
-        centerTableView.refresh();
+    }
+        
+    public void saveToFile() {
+        String path = fileChooserView.saveToFile();
+        saveAndLoad.objectOutput(path);
     }
     
+    public void loadFromFile() {
+        String path = fileChooserView.loadFromFile();
+        saveAndLoad.objectInput(path);
+        centerTableView.refresh();
+    }
 }
