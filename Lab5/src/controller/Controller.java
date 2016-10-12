@@ -5,6 +5,7 @@
  */
 package controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import javafx.application.Platform;
@@ -25,6 +26,7 @@ import model.Book;
 import model.CollectionOfBooks;
 import view.AddBookView;
 import view.CenterTableView;
+import view.FileChooserView;
 import view.MainView;
 
 /**
@@ -36,12 +38,14 @@ public class Controller {
     private MainView mainView;
     private AddBookView addBookView;
     private CenterTableView centerTableView;
+    private FileChooserView fileChooserView;
     private Alert alert = new Alert(Alert.AlertType.INFORMATION);
     
-    public Controller(MainView mainView, CollectionOfBooks books, CenterTableView centerTableView) {
+    public Controller(MainView mainView, CollectionOfBooks books, CenterTableView centerTableView, FileChooserView fileChooserView) {
         this.books = books;
         this.mainView = mainView;
         this.centerTableView = centerTableView;
+        this.fileChooserView = fileChooserView;
         
     }
     
@@ -102,4 +106,23 @@ public class Controller {
     public void removeBook() {
         centerTableView.removeBook();
     }
+    
+    public void searchBook(String searchValue, String searched) {
+        if ("Title".equals(searchValue))
+            centerTableView.setSearchedList(books.searchByTitle(searched));
+        else if("ISBN".equals(searchValue)) 
+            centerTableView.setSearchedList(books.searchByIsbn(searched));
+        else if("Author".equals(searchValue)) 
+            centerTableView.setSearchedList(books.searchByAuthor(searched));
+        else
+            centerTableView.setSearchedList(books.searchByTitle(searched));
+            
+    }
+    
+    public void refresh() throws IOException {
+        centerTableView.refresh();
+        fileChooserView.saveFile();
+        centerTableView.refresh();
+    }
+    
 }

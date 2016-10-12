@@ -6,9 +6,12 @@
 package view;
 
 import controller.Controller;
+import java.io.IOException;
 import model.Author;
 import model.Book;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -69,6 +72,17 @@ public class BottomHboxView extends HBox {
             public void handle(ActionEvent event) {
                 controller.removeBook();
                 System.out.println("REMOVE IN GRID TEST");
+            }
+        });
+        
+        refresh.setOnAction(new EventHandler<ActionEvent>() {
+            @Override 
+            public void handle(ActionEvent event) {
+                try {
+                    controller.refresh();
+                } catch (IOException ex) {
+                    System.out.println("sd");
+                }
             }
         });
         

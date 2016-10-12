@@ -90,7 +90,16 @@ public class CenterTableView extends TableView {
         author.setCellValueFactory(
             new PropertyValueFactory<Book, ArrayList<Author>>("authors"));
         this.setItems(books.getRealList());   
-
     }    
+    
+    public void setSearchedList(ArrayList<Book> tmpBooks) {
+        ObservableList<Book> tmpObvBooks;
+        tmpObvBooks = FXCollections.observableArrayList(tmpBooks);
+        this.setItems(tmpObvBooks);
+    }
+    
+    public void refresh() {
+        this.setItems(books.getRealList());
+    }
 
 }

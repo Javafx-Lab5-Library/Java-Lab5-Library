@@ -215,9 +215,9 @@ public class CollectionOfBooks {
 	* @throws IOException If a file is not found to read from.
 	* @throws ClassNotFoundException If a class is not found to read in to.
 	*/
-	/*public void readFromFile(ObjectInputStream input) throws IOException, ClassNotFoundException {
-		books = (ArrayList<Book>) input.readObject();
-	}*/
+	public void readFromFile(ObjectInputStream input) throws IOException, ClassNotFoundException {
+		books = (ObservableList<Book>) input.readObject();
+	}
 
 	/**
 	* Writes to a file to save a list of <code>Book</code> when program is closed.

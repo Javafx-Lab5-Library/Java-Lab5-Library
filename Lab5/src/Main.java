@@ -25,7 +25,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         CollectionOfBooks books = new CollectionOfBooks();
-        MainView view = new MainView(books);
+        MainView view = new MainView(books, primaryStage);
         
         /*Button btn = new Button();
         btn.setText("Say 'Hello World'");
