@@ -17,6 +17,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -85,7 +86,10 @@ public class AddBookView extends Stage{
         isbnL = new Label("Isbn:");
         editionL = new Label("Edition:");
         priceL = new Label("Price:");
-        authorL = new Label("Author:");
+        authorL = new Label("Authors:");
+        Tooltip authorTip= new Tooltip("Use ',' to separate authors!");
+        authorL.setTooltip(authorTip);
+        
         setBlackLabels();
 
         title = new TextField();
@@ -93,12 +97,13 @@ public class AddBookView extends Stage{
         edition = new TextField();
         price = new TextField();
         author = new TextField();
+        author.setTooltip(authorTip);
         
         title.setPromptText("Type title here");
         isbn.setPromptText("Type isbn here");
         edition.setPromptText("Type edition here");
         price.setPromptText("Type price here");
-        author.setPromptText("Type author here");
+        author.setPromptText("Type authors here");
         
         addBook = new Button("Add Book");
         cancel = new Button("Cancel");

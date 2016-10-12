@@ -11,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.Alert;
 import javafx.stage.FileChooser;
@@ -85,12 +86,32 @@ public class Controller {
             addBookView.setRedLabels(3);
             error = true;
         }
+        
         if (error) {
             addBookView.showAlert();
             return false;
         }
         else {
-            books.addBook(new Book(tmp.get(0), tmp.get(1), edition, price, new Author(tmp.get(4))));
+            String tmpS = tmp.get(4);
+            String author = "";
+            ArrayList<String> authors = new ArrayList();
+            int i = 0;
+            //while (tmpS.charAt(i) != '\0') 
+            for (i = 0; i < tmpS.length(); i++) {
+                if (tmpS.charAt(i) != ',') {
+                    author += tmpS.charAt(i);
+                }
+                else {
+                    authors.add(author.trim());
+                    author = "";
+                } 
+            }
+            if (author.length() != 0)
+                authors.add(author.trim());
+            
+            System.out.println(author.length());
+            books.addBook(new Book(tmp.get(0), tmp.get(1), edition, price, authors));
+            
             centerTableView.refresh();
             addBookView.exitStage();
             return true;

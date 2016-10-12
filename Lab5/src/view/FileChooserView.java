@@ -41,9 +41,11 @@ public class FileChooserView {
     public String loadFromFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open a file");
+        fileChooser.setInitialDirectory(new File("C:\\Users\\Niklas\\Desktop"));
         File file = fileChooser.showOpenDialog(stage);
         if (file != null) {
             String path = file.getPath();
+            System.out.println("path: " + path);
             return path;
         }
         return null;

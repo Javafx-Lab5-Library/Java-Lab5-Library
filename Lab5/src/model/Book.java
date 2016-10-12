@@ -29,16 +29,14 @@ public class Book implements Serializable {
 	* @param price The price.
 	* @param author The first author.
 	*/
-	public Book(String title, String isbn, int edition, double price, Author author) {
-		//this.title = new SimpleStringProperty(title);
-		//this.isbn = new SimpleStringProperty(isbn);
+	public Book(String title, String isbn, int edition, double price, ArrayList<String> authors) {
                 this.title = title;
                 this.isbn = isbn;
 		this.edition = edition;
 		this.price = price;
-		authors = new ArrayList<Author>();
-		authors.add(author);
-                authors.add(new Author("another"));
+		this.authors = new ArrayList<Author>();
+                for (String s : authors)
+                    this.authors.add(new Author(s));
 	}
 
 	/**

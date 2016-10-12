@@ -40,10 +40,13 @@ public class CenterTableView extends TableView {
     public CenterTableView (CollectionOfBooks books) {
         this.books = books;
 
-                
-        books.addBook(new Book("wer", "214124", 3, 4, new Author("qwe")));
-        books.addBook(new Book("sdf", "234625", 4, 5, new Author("asd")));
-        books.addBook(new Book("xcv", "423454", 6, 6, new Author("zxc")));
+        ArrayList<String> s = new ArrayList();
+        s.add("qwe");
+        books.addBook(new Book("wer", "214124", 3, 4, s));
+        s.add("asd");
+        books.addBook(new Book("sdf", "234625", 4, 5, s));
+        s.add("zxc");
+        books.addBook(new Book("xcv", "423454", 6, 6, s));
 
         //test = books.getRealList();
         observBooks = FXCollections.observableArrayList(books.getRealList());
