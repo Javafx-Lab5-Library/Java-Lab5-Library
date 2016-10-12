@@ -96,7 +96,6 @@ public class Controller {
             String author = "";
             ArrayList<String> authors = new ArrayList();
             int i = 0;
-            //while (tmpS.charAt(i) != '\0') 
             for (i = 0; i < tmpS.length(); i++) {
                 if (tmpS.charAt(i) != ',') {
                     author += tmpS.charAt(i);
@@ -138,18 +137,20 @@ public class Controller {
             
     }
     
-    public void refresh() throws IOException {
+    public void refresh() {
         centerTableView.refresh();
     }
         
     public void saveToFile() {
         String path = fileChooserView.saveToFile();
-        saveAndLoad.objectOutput(path);
+        if (path != null)
+            saveAndLoad.objectOutput(path);
     }
     
     public void loadFromFile() {
         String path = fileChooserView.loadFromFile();
-        saveAndLoad.objectInput(path);
+        if (path != null)
+            saveAndLoad.objectInput(path);
         centerTableView.refresh();
     }
 }

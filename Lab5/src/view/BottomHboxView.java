@@ -57,7 +57,7 @@ public class BottomHboxView extends HBox {
     
     private void addEventHandlers(CollectionOfBooks books) {
         
-        
+        // med lambda expressions
         addBook.setOnAction(e -> controller.addBook());
         /*addBook.setOnAction(new EventHandler<ActionEvent>() {
             @Override 
@@ -71,18 +71,13 @@ public class BottomHboxView extends HBox {
             @Override 
             public void handle(ActionEvent event) {
                 controller.removeBook();
-                System.out.println("REMOVE IN GRID TEST");
             }
         });
         
         refresh.setOnAction(new EventHandler<ActionEvent>() {
             @Override 
             public void handle(ActionEvent event) {
-                try {
-                    controller.refresh();
-                } catch (IOException ex) {
-                    System.out.println("sd");
-                }
+                controller.refresh();
             }
         });
         

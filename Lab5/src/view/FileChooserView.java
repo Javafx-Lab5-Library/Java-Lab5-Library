@@ -32,22 +32,26 @@ public class FileChooserView {
     public String saveToFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open a file");
-        File file = fileChooser.showSaveDialog(stage);
-           
-        String path = file.getPath();
-        return path;
+        try {
+            File file = fileChooser.showSaveDialog(stage);
+            String path = file.getPath();
+            return path;
+        }
+        catch (Exception e) {
+            return null;
+        }
     }
     
     public String loadFromFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open a file");
-        fileChooser.setInitialDirectory(new File("C:\\Users\\Niklas\\Desktop"));
-        File file = fileChooser.showOpenDialog(stage);
-        if (file != null) {
+        try {
+            File file = fileChooser.showOpenDialog(stage);
             String path = file.getPath();
-            System.out.println("path: " + path);
             return path;
         }
-        return null;
+        catch (Exception e) {
+            return null;
+        }
     }        
 }
