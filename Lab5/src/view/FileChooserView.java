@@ -10,18 +10,21 @@ import javafx.scene.control.Alert;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+
 /**
  *
  * @author Niklas
  */
 public class FileChooserView {
     private Stage stage;
+    private String path;
     private Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
     private FileChooser fileChooser;
     
     public FileChooserView(Stage stage) {
         this.stage = stage;
+        path = "";
         initView();
     }
     
@@ -31,14 +34,23 @@ public class FileChooserView {
     }
     
     public String saveToFile() {
+        if (path.length() > 0)
+            return path;
+        else
+            return saveAsToFile();
+    }
+    
+    public String saveAsToFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open a file");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("SER", "*.ser"));
         try {
             File file = fileChooser.showSaveDialog(stage);
-            String path = file.getPath();
+            path = file.getPath();
             return path;
         }
         catch (Exception e) {
+            path = "";
             return null;
         }
     }
@@ -46,12 +58,14 @@ public class FileChooserView {
     public String loadFromFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open a file");
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("SER", "*.ser"));
         try {
             File file = fileChooser.showOpenDialog(stage);
-            String path = file.getPath();
+            path = file.getPath();
             return path;
         }
         catch (Exception e) {
+            path = "";
             return null;
         }
     }   

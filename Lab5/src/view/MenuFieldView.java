@@ -20,6 +20,7 @@ public class MenuFieldView extends MenuBar{
     private Controller controller;
     private Menu menu;
     private MenuItem save;
+    private MenuItem saveAs;
     private MenuItem load;
     private MenuItem exit;
     
@@ -32,9 +33,11 @@ public class MenuFieldView extends MenuBar{
     private void initView() {
         Menu menu = new Menu("File");
         save = new MenuItem("Save");
+        saveAs = new MenuItem("Save As");
         load = new MenuItem("Load");
         exit = new MenuItem("Exit");
         menu.getItems().add(save);
+        menu.getItems().add(saveAs);
         menu.getItems().add(load);
         menu.getItems().add(exit);
         this.getMenus().addAll(menu);
@@ -43,25 +46,20 @@ public class MenuFieldView extends MenuBar{
     }
     
     private void addActionHandlers() {
-        save.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                controller.saveToFile();
-            }
+        save.setOnAction((ActionEvent event) -> {
+            controller.saveToFile();
         });
         
-        load.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                controller.loadFromFile();
-            }
+        saveAs.setOnAction((ActionEvent event) -> {
+            controller.saveAsToFile();
         });
         
-        exit.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                controller.exitProgram();
-            }
+        load.setOnAction((ActionEvent event) -> {
+            controller.loadFromFile();
+        });
+        
+        exit.setOnAction((ActionEvent event) -> {
+            controller.exitProgram();
         });
     }
 }

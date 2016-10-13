@@ -32,7 +32,7 @@ public class BottomHboxView extends HBox {
     private Controller controller;
     private Button addBook;
     private Button removeBook;
-    private Button loanBook;
+    private Button quickSave;
     private Button refresh;
 
     public BottomHboxView(CollectionOfBooks books, Controller controller) {
@@ -49,16 +49,16 @@ public class BottomHboxView extends HBox {
         
         addBook = new Button("Add Book");
         removeBook = new Button("Remove Book");
-        loanBook = new Button("Loan Book");
+        quickSave = new Button("Save");
         refresh = new Button("Refresh");
 
-        this.getChildren().addAll(addBook, removeBook, loanBook, refresh);
+        this.getChildren().addAll(addBook, removeBook, refresh, quickSave);
     }
     
     private void addEventHandlers(CollectionOfBooks books) {
         
         // med lambda expressions
-        addBook.setOnAction(e -> controller.addBook());
+        addBook.setOnAction((ActionEvent event) -> controller.addBook());
         /*addBook.setOnAction(new EventHandler<ActionEvent>() {
             @Override 
             public void handle(ActionEvent event) {
@@ -67,21 +67,17 @@ public class BottomHboxView extends HBox {
             }
         });*/
         
-        removeBook.setOnAction(new EventHandler<ActionEvent>() {
-            @Override 
-            public void handle(ActionEvent event) {
-                controller.removeBook();
-            }
+        removeBook.setOnAction((ActionEvent event) -> {
+            controller.removeBook();
         });
         
-        refresh.setOnAction(new EventHandler<ActionEvent>() {
-            @Override 
-            public void handle(ActionEvent event) {
-                controller.refresh();
-            }
+        refresh.setOnAction((ActionEvent event) -> {
+            controller.refresh();
         });
         
-        
+        quickSave.setOnAction((ActionEvent event) -> {
+            controller.saveToFile();
+        });
     }
 }
 

@@ -172,6 +172,14 @@ public class Controller {
         else
             fileChooserView.saveAlert();
     }
+    
+    public void saveAsToFile() {
+        String path = fileChooserView.saveAsToFile();
+        if (path != null)
+            saveAndLoad.objectOutput(path);
+        else
+            fileChooserView.saveAlert();
+    }
         
     public void loadFromFile() {
         String path = fileChooserView.loadFromFile();
