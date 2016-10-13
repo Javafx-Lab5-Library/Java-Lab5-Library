@@ -21,6 +21,7 @@ import model.Book;
 import model.CollectionOfBooks;
 import view.AddBookView;
 import view.CenterTableView;
+import view.ExitVBoxView;
 import view.FileChooserView;
 import view.MainView;
 
@@ -35,6 +36,7 @@ public class Controller {
     private CenterTableView centerTableView;
     private FileChooserView fileChooserView;
     private SaveAndLoad saveAndLoad;
+    private ExitVBoxView exitView;
     private Alert alert = new Alert(Alert.AlertType.INFORMATION);
     
     public Controller(MainView mainView, CollectionOfBooks books, 
@@ -145,6 +147,10 @@ public class Controller {
         String path = fileChooserView.saveToFile();
         if (path != null)
             saveAndLoad.objectOutput(path);
+    }
+    
+    public void exitProgram(){
+        exitView = new ExitVBoxView();
     }
     
     public void loadFromFile() {

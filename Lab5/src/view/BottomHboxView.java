@@ -35,7 +35,7 @@ public class BottomHboxView extends HBox {
     private Button loanBook;
     private Button refresh;
 
-    BottomHboxView(CollectionOfBooks books, Controller controller) {
+    public BottomHboxView(CollectionOfBooks books, Controller controller) {
         super(30);
         this.books = books;
         this.controller = controller;
