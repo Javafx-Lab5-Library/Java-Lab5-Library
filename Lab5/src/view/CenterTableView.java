@@ -8,6 +8,8 @@ package view;
 
 import model.Author;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 import javafx.collections.FXCollections;
 import model.Book;
 import model.CollectionOfBooks;
@@ -20,7 +22,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
  *
  * @author Niklas
  */
-public class CenterTableView extends TableView {
+public class CenterTableView extends TableView implements Observer {
     private CollectionOfBooks books;
     private ObservableList<Book> observBooks;
     private TableColumn title;
@@ -35,9 +37,9 @@ public class CenterTableView extends TableView {
 
         ArrayList<String> s = new ArrayList();
         s.add("qwe");
-        books.addBook(new Book("wer", "214124", 3, 4, s));
+        books.addBook(new Book("wdser", "214124", 3, 4, s));
         s.add("asd");
-        books.addBook(new Book("sdf", "234625", 4, 5, s));
+        books.addBook(new Book("sdsdf", "234625", 4, 5, s));
         s.add("zxc");
         books.addBook(new Book("xcv", "423454", 6, 6, s));
 
@@ -47,15 +49,16 @@ public class CenterTableView extends TableView {
         initView();
     }
     
-    public void removeBook() {
+    public ArrayList<Book> removeBook() {
         ObservableList<Book> booksSelected;
 
         booksSelected = this.getSelectionModel().getSelectedItems();
- 
+        ArrayList<Book> tmp = new ArrayList();
         for (Book b : booksSelected) {
+            tmp.add(b);
             books.removeBook(b);
-            refresh();
         }
+        return tmp;
     }
     
     private void initView() {
@@ -69,7 +72,7 @@ public class CenterTableView extends TableView {
         price = new TableColumn("Price");
         price.setMinWidth(80);
         author = new TableColumn("Author");
-        author.setMinWidth(80);
+        author.setMinWidth(148);
         
         this.getColumns().addAll(title, isbn, edition, price, author);
         
@@ -84,6 +87,7 @@ public class CenterTableView extends TableView {
         author.setCellValueFactory(
             new PropertyValueFactory<Book, ArrayList<Author>>("authors"));
         refresh();
+        this.setItems(observBooks);
     }    
     
     public void setSearchedList(ArrayList<Book> tmpBooks) {
@@ -93,8 +97,16 @@ public class CenterTableView extends TableView {
     }
     
     public void refresh() {
-        observBooks = FXCollections.observableArrayList(books.getRealList());
-        this.setItems(observBooks);
+        observBooks.removeAll(observBooks);
+        observBooks.addAll(books.getRealList());
+        
+        //observBooks = FXCollections.observableArrayList(books.getRealList());
+        //this.setItems(observBooks);
+    }
+
+    @Override
+    public void update(Observable o, Object o1) {
+        refresh();
     }
 
     

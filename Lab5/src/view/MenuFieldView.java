@@ -41,6 +41,7 @@ public class MenuFieldView extends MenuBar{
         menu.getItems().add(load);
         menu.getItems().add(exit);
         this.getMenus().addAll(menu);
+        //this.setPadding(0, 10, 0, 10);
         
         addActionHandlers();
     }

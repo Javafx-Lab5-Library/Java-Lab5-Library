@@ -28,7 +28,7 @@ public class SearchFieldView extends HBox {
     private Button searchButton;
     
     public SearchFieldView(CollectionOfBooks books, Controller controller) {
-        super(10);
+        super(30);
         this.books = books;
         this.controller = controller;
         
@@ -40,11 +40,11 @@ public class SearchFieldView extends HBox {
     
     
     private void initView() {
-        this.setAlignment(Pos.CENTER);
-        this.setPadding(new Insets(5, 10, 5, 10));
+        this.setAlignment(Pos.BASELINE_LEFT);
+        this.setPadding(new Insets(5, 10, 10, 10));
         
         searchField = new TextField();
-        searchField.setPromptText("Type here to search");
+        searchField.setPromptText("Type here to search then press  --->");
         searchButton = new Button("Search");
         
         searchComboBox = new ComboBox<>();
@@ -54,6 +54,11 @@ public class SearchFieldView extends HBox {
                 "Author"
         );
         searchComboBox.setPromptText("Title");
+        
+        searchComboBox.setPrefWidth(90);
+        searchField.setPrefWidth(210);
+        searchButton.setPrefWidth(90);
+        
         addHandlers();
         
         this.getChildren().addAll(searchComboBox, searchField, searchButton);

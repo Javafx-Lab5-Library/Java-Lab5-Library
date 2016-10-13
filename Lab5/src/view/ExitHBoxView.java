@@ -28,11 +28,15 @@ public class ExitHBoxView extends HBox{
 
     private void initView(Controller controller) {
         this.setAlignment(Pos.CENTER);
-        this.setPadding(new Insets(5, 10, 5, 10));
+        this.setPadding(new Insets(10, 10, 10, 10));
         
         yesButton = new Button("Save");
         noButton = new Button("Don't save");
         cancelButton = new Button("Cancel");
+        yesButton.setPrefWidth(90);
+        noButton.setPrefWidth(90);
+        cancelButton.setPrefWidth(90);
+        
 
         this.getChildren().addAll(yesButton, noButton, cancelButton);
         

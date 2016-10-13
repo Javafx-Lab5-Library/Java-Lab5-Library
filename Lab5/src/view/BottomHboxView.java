@@ -44,13 +44,18 @@ public class BottomHboxView extends HBox {
     }
     
     private void initView(CollectionOfBooks books) {
-        this.setAlignment(Pos.CENTER);
-        this.setPadding(new Insets(5, 10, 5, 10));
+        this.setAlignment(Pos.BASELINE_LEFT);
+        this.setPadding(new Insets(10, 10, 5, 10));
         
         addBook = new Button("Add Book");
         removeBook = new Button("Remove Book");
         quickSave = new Button("Save");
         refresh = new Button("Refresh");
+        
+        addBook.setMinWidth(90);
+        removeBook.setMinWidth(90);
+        quickSave.setMinWidth(90);
+        refresh.setMinWidth(90);
 
         this.getChildren().addAll(addBook, removeBook, refresh, quickSave);
     }

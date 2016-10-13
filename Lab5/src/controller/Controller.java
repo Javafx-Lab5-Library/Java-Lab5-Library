@@ -116,7 +116,6 @@ public class Controller {
             System.out.println(author.length());
             books.addBook(new Book(tmp.get(0), tmp.get(1), edition, price, authors));
             
-            centerTableView.refresh();
             addBookView.exitStage();
             return true;
         }
@@ -127,7 +126,10 @@ public class Controller {
     }
     
     public void removeBook() {
-        centerTableView.removeBook();
+        ArrayList<Book> tmp = centerTableView.removeBook();
+        for (Book b : tmp) {
+            books.removeBook(b);
+        }
     }
     
     public void searchBook(String searchedFor, String searched) {

@@ -6,15 +6,12 @@
 package view;
 
 import controller.Controller;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import model.CollectionOfBooks;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 /**
  *
@@ -44,12 +41,12 @@ public class MainView extends VBox {
         bottomHbox = new BottomHboxView(books, controller);
         searchField = new SearchFieldView(books, controller);
         menuField = new MenuFieldView(controller);
+        books.addObserver(centerTable);
         
-        
-        this.setPrefSize(600, 450);
+        this.setPrefSize(470, 420);
         this.setAlignment(Pos.CENTER);
-        this.setPadding(new Insets(5, 10, 5, 10));
-        this.getChildren().addAll(menuField, searchField, centerTable, bottomHbox);
+        this.setPadding(new Insets(0, 0, 0, 0));
+        this.getChildren().addAll(menuField, bottomHbox, searchField, centerTable);
         this.setVgrow(centerTable, Priority.ALWAYS);
         
         saveBeforeQuit();
