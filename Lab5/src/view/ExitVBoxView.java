@@ -5,6 +5,7 @@
  */
 package view;
 
+import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -24,22 +25,22 @@ public class ExitVBoxView extends VBox {
     private Label label;
     private ExitHBoxView exitHBox;
     
-    public ExitVBoxView(){
+    public ExitVBoxView(Controller controller){
         super(10);
         this.stage = new Stage();
         this.message = "Do you wish to save before you Quit?";
         
-        initView();
+        initView(controller);
     }
 
-    private void initView() {
+    private void initView(Controller controller) {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Save");
         System.out.println(message);
         label = new Label();
         label.setText(message);
         
-        exitHBox = new ExitHBoxView();
+        exitHBox = new ExitHBoxView(controller);
         
 
         this.getChildren().addAll(label,exitHBox);
@@ -47,9 +48,15 @@ public class ExitVBoxView extends VBox {
         this.setPadding(new Insets(5, 10, 5, 10));
         
         Scene scene = new Scene(this);
+        
+        stage.setTitle("Save before exit?");
         stage.setScene(scene);
+        stage.sizeToScene();
         stage.show();
-        
-        
+    }
+    
+    public void close() {
+        System.out.println("asd");
+        stage.close();
     }
 }

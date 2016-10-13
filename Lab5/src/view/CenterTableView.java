@@ -8,12 +8,6 @@ package view;
 
 import model.Author;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import javafx.beans.Observable;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import model.Book;
 import model.CollectionOfBooks;
@@ -21,7 +15,6 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 
 /**
  *
@@ -55,17 +48,14 @@ public class CenterTableView extends TableView {
     }
     
     public void removeBook() {
-
         ObservableList<Book> booksSelected;
 
         booksSelected = this.getSelectionModel().getSelectedItems();
-        if (booksSelected == null)
-            System.out.println("ASDAKSDLASAJS");
  
         for (Book b : booksSelected) {
-            this.getItems().remove(b);
+            books.removeBook(b);
+            refresh();
         }
-        
     }
     
     private void initView() {
@@ -93,8 +83,6 @@ public class CenterTableView extends TableView {
             new PropertyValueFactory<Book, Double>("price"));
         author.setCellValueFactory(
             new PropertyValueFactory<Book, ArrayList<Author>>("authors"));
-        //observBooks = books.getRealList();
-        //this.setItems(books.getRealList());
         refresh();
     }    
     

@@ -11,6 +11,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import model.CollectionOfBooks;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -21,6 +22,7 @@ import javafx.stage.WindowEvent;
  */
 public class MainView extends VBox {
     private CollectionOfBooks books;
+    private Stage stage;
     private Controller controller;
     private BottomHboxView bottomHbox;
     private CenterTableView centerTable;
@@ -31,13 +33,14 @@ public class MainView extends VBox {
     
     public MainView(CollectionOfBooks books, Stage stage) {
         this.books = books;
-        initView(stage);
+        this.stage = stage;
+        initView();
     }
     
-    private void initView(Stage stage) {
+    private void initView() {
         centerTable = new CenterTableView(books);
         fileChooser = new FileChooserView(stage);
-        controller = new Controller(this, books, centerTable, fileChooser);
+        controller = new Controller(this, books, centerTable, fileChooser, stage);
         bottomHbox = new BottomHboxView(books, controller);
         searchField = new SearchFieldView(books, controller);
         menuField = new MenuFieldView(controller);
@@ -47,16 +50,15 @@ public class MainView extends VBox {
         this.setAlignment(Pos.CENTER);
         this.setPadding(new Insets(5, 10, 5, 10));
         this.getChildren().addAll(menuField, searchField, centerTable, bottomHbox);
+        this.setVgrow(centerTable, Priority.ALWAYS);
         
-        stage.setOnCloseRequest(e-> {
-            e.consume();
-            saveBeforeQuit();
-                });
-        
+        saveBeforeQuit();
     }
     
     private void saveBeforeQuit(){
-        exitView = new ExitVBoxView();
-        System.out.println("hej");
+        stage.setOnCloseRequest(e-> {
+            e.consume();
+            controller.exitProgram();
+        });
     }
 }

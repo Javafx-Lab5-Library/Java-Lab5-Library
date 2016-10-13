@@ -205,22 +205,12 @@ public class AddBookView extends Stage{
     }
     
     private void addEventHandlers() {
-        addBook.setOnAction(new EventHandler<ActionEvent>() {
-            @Override 
-            public void handle(ActionEvent event) {
-                System.out.println("IN AddBookView");
-                controller.handleInput();
-                //books.addBook(new Book("gfhgh", "54", 9, 8, new Author("hj")));
-            }
+        addBook.setOnAction((ActionEvent event) -> {
+            controller.handleInput();
         });
         
-        cancel.setOnAction(new EventHandler<ActionEvent>() {
-            @Override 
-            public void handle(ActionEvent event) {
-                System.out.println("IN AddBookView");
-                controller.handleCancel();
-                //books.addBook(new Book("gfhgh", "54", 9, 8, new Author("hj")));
-            }
+        cancel.setOnAction((ActionEvent event) -> {
+            controller.handleAddBookCancel();
         });
     }
     

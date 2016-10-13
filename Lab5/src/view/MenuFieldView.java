@@ -50,16 +50,6 @@ public class MenuFieldView extends MenuBar{
             }
         });
         
-        exit.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                controller.exitProgram();
-            }
-        });
-        
-        
-        
-        
         load.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -67,7 +57,11 @@ public class MenuFieldView extends MenuBar{
             }
         });
         
+        exit.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                controller.exitProgram();
+            }
+        });
     }
-    
-    
 }

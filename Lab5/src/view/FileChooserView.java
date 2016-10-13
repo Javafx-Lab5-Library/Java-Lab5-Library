@@ -6,6 +6,7 @@
 package view;
 
 import java.io.File;
+import javafx.scene.control.Alert;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -15,8 +16,8 @@ import javafx.stage.Stage;
  */
 public class FileChooserView {
     private Stage stage;
+    private Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
-    //private File file;
     private FileChooser fileChooser;
     
     public FileChooserView(Stage stage) {
@@ -53,5 +54,19 @@ public class FileChooserView {
         catch (Exception e) {
             return null;
         }
-    }        
+    }   
+    
+    public void saveAlert() {
+        alert.setHeaderText("");
+        alert.setTitle("Alert!");
+        alert.setContentText("File did not save!\n");
+        alert.show();
+    }
+    
+    public void loadAlert() {
+        alert.setHeaderText("");
+        alert.setTitle("Alert!");
+        alert.setContentText("File did not load!\n");
+        alert.show();
+    }
 }

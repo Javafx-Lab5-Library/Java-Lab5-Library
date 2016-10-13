@@ -37,14 +37,17 @@ public class Controller {
     private FileChooserView fileChooserView;
     private SaveAndLoad saveAndLoad;
     private ExitVBoxView exitView;
+    private Stage stage;
     private Alert alert = new Alert(Alert.AlertType.INFORMATION);
     
     public Controller(MainView mainView, CollectionOfBooks books, 
-            CenterTableView centerTableView, FileChooserView fileChooserView) {
+            CenterTableView centerTableView, FileChooserView fileChooserView, 
+             Stage stage) {
         this.books = books;
         this.mainView = mainView;
         this.centerTableView = centerTableView;
         this.fileChooserView = fileChooserView;
+        this.stage = stage;
         saveAndLoad = new SaveAndLoad(books);
         
     }
@@ -119,7 +122,7 @@ public class Controller {
         }
     }
     
-    public void handleCancel() {
+    public void handleAddBookCancel() {
         addBookView.exitStage();
     }
     
@@ -127,12 +130,12 @@ public class Controller {
         centerTableView.removeBook();
     }
     
-    public void searchBook(String searchValue, String searched) {
-        if ("Title".equals(searchValue))
+    public void searchBook(String searchedFor, String searched) {
+        if ("Title".equals(searchedFor))
             centerTableView.setSearchedList(books.searchByTitle(searched));
-        else if("ISBN".equals(searchValue)) 
+        else if("ISBN".equals(searchedFor)) 
             centerTableView.setSearchedList(books.searchByIsbn(searched));
-        else if("Author".equals(searchValue)) 
+        else if("Author".equals(searchedFor)) 
             centerTableView.setSearchedList(books.searchByAuthor(searched));
         else
             centerTableView.setSearchedList(books.searchByTitle(searched));
@@ -143,20 +146,40 @@ public class Controller {
         centerTableView.refresh();
     }
         
+    public void exitProgram(){
+        exitView = new ExitVBoxView(this);
+    }
+    
+    public void closeWithSaving() {
+        saveToFile();
+        exitView.close();
+        stage.close();
+    }
+    
+    public void closeWithoutSaving() {
+        exitView.close();
+        stage.close();
+    }
+    
+    public void closeCanceled() {
+        exitView.close();
+    }
+    
     public void saveToFile() {
         String path = fileChooserView.saveToFile();
         if (path != null)
             saveAndLoad.objectOutput(path);
+        else
+            fileChooserView.saveAlert();
     }
-    
-    public void exitProgram(){
-        exitView = new ExitVBoxView();
-    }
-    
+        
     public void loadFromFile() {
         String path = fileChooserView.loadFromFile();
-        if (path != null)
+        if (path != null) {
             saveAndLoad.objectInput(path);
-        centerTableView.refresh();
+            centerTableView.refresh();
+        }
+        else 
+            fileChooserView.loadAlert();
     }
 }

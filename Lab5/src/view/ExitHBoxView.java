@@ -5,6 +5,7 @@
  */
 package view;
 
+import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -19,31 +20,36 @@ public class ExitHBoxView extends HBox{
     private Button noButton;
     private Button cancelButton;
     
-    public ExitHBoxView(){
+    public ExitHBoxView(Controller controller){
         super(10);
         
-        initView();
+        initView(controller);
     }
 
-    private void initView() {
+    private void initView(Controller controller) {
         this.setAlignment(Pos.CENTER);
         this.setPadding(new Insets(5, 10, 5, 10));
         
-        yesButton = new Button("Yes");
-        noButton = new Button("No");
+        yesButton = new Button("Save");
+        noButton = new Button("Don't save");
         cancelButton = new Button("Cancel");
-        
-        
-        yesButton.setOnAction(e ->{
-            System.out.println("jag ska spara och lämna programmet");
-        });
-        noButton.setOnAction(e ->{
-            System.out.println("jag ska lämna men inte spara");
-        });
-        cancelButton.setOnAction(e ->{
-            System.out.println("jag ska varken spara eller lämna programmet");
-        });
 
         this.getChildren().addAll(yesButton, noButton, cancelButton);
+        
+        addHandlers(controller);
     }
+    
+    private void addHandlers(Controller controller) {
+        yesButton.setOnAction(e ->{
+            controller.closeWithSaving();
+        });
+        noButton.setOnAction(e ->{
+            controller.closeWithoutSaving();
+        });
+        cancelButton.setOnAction(e ->{
+            controller.closeCanceled();
+        });
+    }
+    
+    
 }

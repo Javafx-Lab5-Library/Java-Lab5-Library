@@ -83,6 +83,12 @@ public class CollectionOfBooks {
 		else
 			return false;
 	}
+        
+	public boolean removeBook(Book book) {
+                books.remove(book);
+                return true;
+                //return false;
+	}
 
 	/**
 	* Removes a book from the list if given index is within the list and returns
