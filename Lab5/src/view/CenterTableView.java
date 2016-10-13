@@ -42,9 +42,6 @@ public class CenterTableView extends TableView implements Observer {
         books.addBook(new Book("sdsdf", "234625", 4, 5, s));
         s.add("zxc");
         books.addBook(new Book("xcv", "423454", 6, 6, s));
-
-        //test = books.getRealList();
-        observBooks = FXCollections.observableArrayList(books.getRealList());
         
         initView();
     }
@@ -86,6 +83,8 @@ public class CenterTableView extends TableView implements Observer {
             new PropertyValueFactory<Book, Double>("price"));
         author.setCellValueFactory(
             new PropertyValueFactory<Book, ArrayList<Author>>("authors"));
+        
+        observBooks = FXCollections.observableArrayList(books.getRealList());
         refresh();
         this.setItems(observBooks);
     }    
