@@ -35,14 +35,14 @@ public class CenterTableView extends TableView implements Observer {
     public CenterTableView (CollectionOfBooks books) {
         this.books = books;
 
-        ArrayList<String> s = new ArrayList();
+        /*ArrayList<String> s = new ArrayList();
         s.add("qwe");
         books.addBook(new Book("wdser", "214124", 3, 4, s));
         s.add("asd");
         books.addBook(new Book("sdsdf", "234625", 4, 5, s));
         s.add("zxc");
         books.addBook(new Book("xcv", "423454", 6, 6, s));
-        
+        */
         initView();
     }
     
@@ -61,7 +61,7 @@ public class CenterTableView extends TableView implements Observer {
     private void initView() {
         this.setEditable(true);
         title = new TableColumn("Title");
-        title.setMinWidth(80);
+        title.setMinWidth(100);
         isbn = new TableColumn("Isbn");
         isbn.setMinWidth(80);
         edition = new TableColumn("Edition");
@@ -69,7 +69,7 @@ public class CenterTableView extends TableView implements Observer {
         price = new TableColumn("Price");
         price.setMinWidth(80);
         author = new TableColumn("Author");
-        author.setMinWidth(148);
+        author.setMinWidth(128);
         
         this.getColumns().addAll(title, isbn, edition, price, author);
         
@@ -98,16 +98,11 @@ public class CenterTableView extends TableView implements Observer {
     public void refresh() {
         observBooks.removeAll(observBooks);
         observBooks.addAll(books.getRealList());
-        
-        //observBooks = FXCollections.observableArrayList(books.getRealList());
-        //this.setItems(observBooks);
     }
 
     @Override
     public void update(Observable o, Object o1) {
         refresh();
     }
-
-    
     
 }

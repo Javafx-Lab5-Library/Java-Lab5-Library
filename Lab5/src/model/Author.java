@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Observable;
 
 /**
  * An <code>Author</code> has a <code>name</code>. 
@@ -11,7 +12,7 @@ import java.io.Serializable;
  * @author Niklas Ålander
  * @version 1.0
  */
-public class Author implements Serializable, Comparable<Author> {
+public class Author extends Observable implements Serializable, Comparable<Author> {
 	private String name;
 
 	/**
@@ -36,6 +37,7 @@ public class Author implements Serializable, Comparable<Author> {
 	*/
 	public void setName(String name) {
 		this.name = name;
+                notifyAllObservers();
 	}
 
 	/**
@@ -54,6 +56,11 @@ public class Author implements Serializable, Comparable<Author> {
 
 		return tmp.compareTo(otherTmp);
 	}
+        
+        public void notifyAllObservers() {
+            this.setChanged();
+            this.notifyObservers();
+        }
 
 	/**
 	* Creates a text <code>String</code> of the authors <code>name</code>.

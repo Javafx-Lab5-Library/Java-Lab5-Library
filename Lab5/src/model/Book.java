@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.io.Serializable;
 import java.util.Comparator;
+import java.util.Observable;
 import javafx.beans.property.SimpleStringProperty;
 
 
@@ -14,7 +15,7 @@ import javafx.beans.property.SimpleStringProperty;
  * @author Niklas Ålander
  * @version 1.0
  */
-public class Book implements Serializable {
+public class Book extends Observable implements Serializable {
 	private String title;
 	private String isbn;
 	private int edition;
@@ -49,6 +50,7 @@ public class Book implements Serializable {
         
         public void setTitle(String title) {
             this.title = title;
+            notifyAllObservers();
         }
 
 	/**
@@ -61,6 +63,7 @@ public class Book implements Serializable {
         
         public void setIsbn(String isbn) {
             this.isbn = isbn;
+            notifyAllObservers();
         }
 
 	/**
@@ -73,6 +76,7 @@ public class Book implements Serializable {
         
         public void setEdition(int edition) {
             this.edition = edition;
+            notifyAllObservers();
         }
 
 	public double getPrice() {
@@ -81,6 +85,7 @@ public class Book implements Serializable {
         
         public void setPrice(double price) {
             this.price = price;
+            notifyAllObservers();
         }
 
 	/**
@@ -113,6 +118,7 @@ public class Book implements Serializable {
 	*/
 	public void addAuthor(String name) {
 		authors.add(new Author(name));
+                notifyAllObservers();
 	}
 
 	/**
@@ -122,6 +128,11 @@ public class Book implements Serializable {
 	public void addAuthor(Author author) {
 		authors.add(author);
 	}
+        
+        public void notifyAllObservers() {
+            this.setChanged();
+            this.notifyObservers();
+        }
 
 	/**
 	* Creates a text <code>String</code> with information

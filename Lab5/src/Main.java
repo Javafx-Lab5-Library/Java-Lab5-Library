@@ -59,7 +59,7 @@ public class Main extends Application {
         
         Scene scene = new Scene(view);
         
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("Library");
         primaryStage.setScene(scene);
         primaryStage.sizeToScene();
         primaryStage.show();
