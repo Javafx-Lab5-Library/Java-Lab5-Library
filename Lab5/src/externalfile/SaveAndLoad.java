@@ -19,34 +19,31 @@ import java.util.ArrayList;
  * @author Niklas
  */
 public class SaveAndLoad {
-        private CollectionOfBooks books;
-    
-	public SaveAndLoad(CollectionOfBooks books) {
-            this.books = books;
+
+	public SaveAndLoad() {
+
 	}
 
-        public void objectInput(String path) {
+        public ArrayList<Book> objectInput(String path) {
             ObjectInputStream inputFile = null;
             try {
                     inputFile = new ObjectInputStream(new FileInputStream(path));	
-                    books.setBooks(readFromFile(inputFile));
+                    return readFromFile(inputFile);
             }
             catch (Exception e) {
-                    System.out.println("Could not read file into object");
+                    return null;
             }
         }
         
-        public void objectOutput(String path) {         
+        public boolean objectOutput(String path, CollectionOfBooks books) {         
             ObjectOutputStream outputFile = null;
             try {
-                    System.out.println("1");
                     outputFile = new ObjectOutputStream(new FileOutputStream(path));	
-                    System.out.println("2");
-                    
-                    saveToFile(outputFile);
+                    saveToFile(outputFile, books);
+                    return true;
             }
             catch (Exception e) {
-                    System.out.println("Could not read file into object");
+                    return false;
             }
         }      
 
@@ -54,7 +51,7 @@ public class SaveAndLoad {
 		return (ArrayList<Book>) input.readObject();
 	}
 
-	public void saveToFile(ObjectOutputStream output) throws IOException {
+	public void saveToFile(ObjectOutputStream output, CollectionOfBooks books) throws IOException {
 		output.writeObject(books.getRealList());
 	}
 

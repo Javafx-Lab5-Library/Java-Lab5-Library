@@ -6,20 +6,18 @@
 package controller;
 
 import externalfile.SaveAndLoad;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Alert;
-import javafx.stage.FileChooser;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import model.Author;
 import model.Book;
 import model.CollectionOfBooks;
 import view.AddBookView;
+import view.AlertView;
+import view.SaveAnimationView;
 import view.CenterTableView;
 import view.ExitVBoxView;
 import view.FileChooserView;
@@ -38,18 +36,25 @@ public class Controller {
     private SaveAndLoad saveAndLoad;
     private ExitVBoxView exitView;
     private Stage stage;
-    private Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    private Canvas canvas;
+    private SaveAnimationView saveAniView;
+    private ImageView saveImage;
+    private AlertView alertView;
+    
     
     public Controller(MainView mainView, CollectionOfBooks books, 
             CenterTableView centerTableView, FileChooserView fileChooserView, 
-             Stage stage) {
+            Stage stage, Canvas canvas, ImageView saveImage, HBox imageBox) {
         this.books = books;
         this.mainView = mainView;
         this.centerTableView = centerTableView;
         this.fileChooserView = fileChooserView;
+        this.saveImage = saveImage;
         this.stage = stage;
-        saveAndLoad = new SaveAndLoad(books);
-        
+        this.canvas = canvas;
+        this.saveAniView = new SaveAnimationView(canvas, saveImage, imageBox);
+        saveAndLoad = new SaveAndLoad();
+        alertView = new AlertView();
     }
     
     public void addBook() {
@@ -93,7 +98,8 @@ public class Controller {
         }
         
         if (error) {
-            addBookView.showAlert();
+            alertView.showAlert("Make sure you fill all fields!\n"
+                + "Make sure Edition and Price are Positive numbers!");
             return false;
         }
         else {
@@ -145,6 +151,7 @@ public class Controller {
     }
     
     public void refresh() {
+        saveAniView.startAnimation();
         centerTableView.refresh();
     }
         
@@ -169,27 +176,36 @@ public class Controller {
     
     public void saveToFile() {
         String path = fileChooserView.saveToFile();
-        if (path != null)
-            saveAndLoad.objectOutput(path);
+        if (path != null) {
+            if (!saveAndLoad.objectOutput(path, books))
+                alertView.showAlert("File did not save!");
+            saveAniView.startAnimation();
+        }
         else
-            fileChooserView.saveAlert();
+            alertView.showAlert("File did not save!");
     }
     
     public void saveAsToFile() {
         String path = fileChooserView.saveAsToFile();
-        if (path != null)
-            saveAndLoad.objectOutput(path);
+        if (path != null) {
+            if (!saveAndLoad.objectOutput(path, books))
+                alertView.showAlert("File did not save!");
+        }
         else
-            fileChooserView.saveAlert();
+            alertView.showAlert("File did not save!");
     }
         
     public void loadFromFile() {
         String path = fileChooserView.loadFromFile();
         if (path != null) {
-            saveAndLoad.objectInput(path);
-            centerTableView.refresh();
+            if (saveAndLoad.objectInput(path) != null) {
+                books.setBooks(saveAndLoad.objectInput(path));
+                centerTableView.refresh();
+            }
+            else
+                alertView.showAlert("File did not load!");
         }
         else 
-            fileChooserView.loadAlert();
+            alertView.showAlert("File did not load!");
     }
 }

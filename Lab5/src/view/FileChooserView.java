@@ -6,7 +6,6 @@
 package view;
 
 import java.io.File;
-import javafx.scene.control.Alert;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -18,7 +17,6 @@ import javafx.stage.Stage;
 public class FileChooserView {
     private Stage stage;
     private String path;
-    private Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
     private FileChooser fileChooser;
     
@@ -43,7 +41,9 @@ public class FileChooserView {
     public String saveAsToFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open a file");
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("SER", "*.ser"));
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("SER", "*.ser"),
+                new FileChooser.ExtensionFilter("All Files", "*.*"));
         try {
             File file = fileChooser.showSaveDialog(stage);
             path = file.getPath();
@@ -58,7 +58,9 @@ public class FileChooserView {
     public String loadFromFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open a file");
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("SER", "*.ser"));
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("SER", "*.ser"),
+                new FileChooser.ExtensionFilter("All Files", "*.*"));
         try {
             File file = fileChooser.showOpenDialog(stage);
             path = file.getPath();
@@ -69,18 +71,4 @@ public class FileChooserView {
             return null;
         }
     }   
-    
-    public void saveAlert() {
-        alert.setHeaderText("");
-        alert.setTitle("Alert!");
-        alert.setContentText("File did not save!\n");
-        alert.show();
-    }
-    
-    public void loadAlert() {
-        alert.setHeaderText("");
-        alert.setTitle("Alert!");
-        alert.setContentText("File did not load!\n");
-        alert.show();
-    }
 }

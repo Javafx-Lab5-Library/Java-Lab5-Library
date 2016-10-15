@@ -196,14 +196,6 @@ public class AddBookView extends Stage{
         this.close();
     }
     
-    public void showAlert() {
-        alert.setHeaderText("");
-        alert.setTitle("Alert!");
-        alert.setContentText("Make sure you fill all fields!\n"
-                + "Make sure Edition and Price are Positive numbers!");
-        alert.show();
-    }
-    
     private void addEventHandlers() {
         addBook.setOnAction((ActionEvent event) -> {
             controller.handleInput();

@@ -4,30 +4,17 @@
  * and open the template in the editor.
  */
 
-import java.awt.Color;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.CollectionOfBooks;
-
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import view.MainView;
 
@@ -40,24 +27,28 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         CollectionOfBooks books = new CollectionOfBooks();
-        MainView view = new MainView(books, primaryStage);
+        Canvas canvas = new Canvas(200, 400);
+        ImageView bookImage = new ImageView();
+        bookImage.setX(300);
+        bookImage.setY(300);
+        StackPane st = new StackPane();
+        HBox imageBox = new HBox();
+        MainView view = new MainView(books, primaryStage, canvas, bookImage, imageBox);
         
-        /*Button btn = new Button();
-        btn.setText("read from file");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
-            @Override
-            public void handle(ActionEvent event) {
-                try {
-                    readFile(books, stage);
-                } catch (IOException ex) {
-                    System.out.println("shit happned");
-                }
-                System.out.println("Hello World!");
-            }
-        });*/
+        //imageBox.setAlignment(Pos.BASELINE_LEFT);
+        imageBox.setPadding(new Insets(10, 10, 5, 10));
+        imageBox.getChildren().setAll(bookImage);
+        imageBox.setMouseTransparent(true);
+        //st.setMouseTransparent(false);
+        st.getChildren().setAll(view, imageBox); 
+        /*Group root = new Group();
+        root.getChildren().add(view);
+        root.getChildren().add(canvas);
+        canvas.blendModeProperty();*/
+
         
-        Scene scene = new Scene(view);
+        
+        Scene scene = new Scene(st);
         
         primaryStage.setTitle("Library");
         primaryStage.setScene(scene);
@@ -73,3 +64,20 @@ public class Main extends Application {
     }
     
 }
+
+
+
+        /*Button btn = new Button();
+        btn.setText("read from file");
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+            
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    readFile(books, stage);
+                } catch (IOException ex) {
+                    System.out.println("shit happned");
+                }
+                System.out.println("Hello World!");
+            }
+        });*/
