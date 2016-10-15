@@ -2,9 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.io.Serializable;
-import java.util.Comparator;
 import java.util.Observable;
-import javafx.beans.property.SimpleStringProperty;
 
 
 /**
