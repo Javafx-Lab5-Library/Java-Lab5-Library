@@ -40,7 +40,7 @@ public class SaveAnimationView {
 
     private void initAnimation() {
         image = new Image(this.getClass().
-                getResource("library-books.png").
+                getResource("/resources/library-books-t.png").
                 toString());
         /*width = image.getWidth();
         height = image.getHeight();
