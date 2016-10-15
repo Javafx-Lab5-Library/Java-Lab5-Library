@@ -23,7 +23,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
  * @author Niklas
  */
 public class CenterTableView extends TableView implements Observer {
-    private CollectionOfBooks books;
+    private CollectionOfBooks library;
     private ObservableList<Book> observBooks;
     private TableColumn title;
     private TableColumn isbn;
@@ -32,28 +32,27 @@ public class CenterTableView extends TableView implements Observer {
     private TableColumn author;
     
     
-    public CenterTableView (CollectionOfBooks books) {
-        this.books = books;
+    public CenterTableView (CollectionOfBooks library) {
+        this.library = library;
 
-        /*ArrayList<String> s = new ArrayList();
+        ArrayList<String> s = new ArrayList();
         s.add("qwe");
-        books.addBook(new Book("wdser", "214124", 3, 4, s));
+        library.addBook(new Book("wdser", "214124", 3, 4, s));
         s.add("asd");
-        books.addBook(new Book("sdsdf", "234625", 4, 5, s));
+        library.addBook(new Book("sdsdf", "234625", 4, 5, s));
         s.add("zxc");
-        books.addBook(new Book("xcv", "423454", 6, 6, s));
-        */
+        library.addBook(new Book("xcv", "423454", 6, 6, s));
+        
         initView();
     }
     
     public ArrayList<Book> removeBook() {
-        ObservableList<Book> booksSelected;
+        ObservableList<Book> librarySelected;
 
-        booksSelected = this.getSelectionModel().getSelectedItems();
+        librarySelected = this.getSelectionModel().getSelectedItems();
         ArrayList<Book> tmp = new ArrayList();
-        for (Book b : booksSelected) {
+        for (Book b : librarySelected) {
             tmp.add(b);
-            books.removeBook(b);
         }
         return tmp;
     }
@@ -84,9 +83,8 @@ public class CenterTableView extends TableView implements Observer {
         author.setCellValueFactory(
             new PropertyValueFactory<Book, ArrayList<Author>>("authors"));
         
-        observBooks = FXCollections.observableArrayList(books.getRealList());
+        observBooks = FXCollections.observableArrayList(library.getRealList());
         refresh();
-        this.setItems(observBooks);
     }    
     
     public void setSearchedList(ArrayList<Book> tmpBooks) {
@@ -97,7 +95,8 @@ public class CenterTableView extends TableView implements Observer {
     
     public void refresh() {
         observBooks.removeAll(observBooks);
-        observBooks.addAll(books.getRealList());
+        observBooks.addAll(library.getRealList());
+        this.setItems(observBooks);
     }
 
     @Override

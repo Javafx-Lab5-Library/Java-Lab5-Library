@@ -35,11 +35,11 @@ public class SaveAndLoad {
             }
         }
         
-        public boolean objectOutput(String path, CollectionOfBooks books) {         
+        public boolean objectOutput(String path, CollectionOfBooks library) {         
             ObjectOutputStream outputFile = null;
             try {
                     outputFile = new ObjectOutputStream(new FileOutputStream(path));	
-                    saveToFile(outputFile, books);
+                    saveToFile(outputFile, library);
                     return true;
             }
             catch (Exception e) {
@@ -51,8 +51,8 @@ public class SaveAndLoad {
 		return (ArrayList<Book>) input.readObject();
 	}
 
-	public void saveToFile(ObjectOutputStream output, CollectionOfBooks books) throws IOException {
-		output.writeObject(books.getRealList());
+	public void saveToFile(ObjectOutputStream output, CollectionOfBooks library) throws IOException {
+		output.writeObject(library.getRealList());
 	}
 
     

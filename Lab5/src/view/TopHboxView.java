@@ -6,44 +6,31 @@
 package view;
 
 import controller.Controller;
-import java.io.IOException;
-import model.Author;
-import model.Book;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.HPos;
-import model.CollectionOfBooks;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
 /**
  *
  * @author Niklas
  */
-public class BottomHboxView extends HBox {
-    private CollectionOfBooks books;
+public class TopHboxView extends HBox {
     private Controller controller;
     private Button addBook;
     private Button removeBook;
     private Button quickSave;
     private Button refresh;
 
-    public BottomHboxView(CollectionOfBooks books, Controller controller) {
+    public TopHboxView(Controller controller) {
         super(30);
-        this.books = books;
         this.controller = controller;
-        initView(books);
-        addEventHandlers(books);
+        initView();
+        addEventHandlers();
     }
     
-    private void initView(CollectionOfBooks books) {
+    private void initView() {
         this.setAlignment(Pos.BASELINE_LEFT);
         this.setPadding(new Insets(10, 10, 5, 10));
         
@@ -60,17 +47,12 @@ public class BottomHboxView extends HBox {
         this.getChildren().addAll(addBook, removeBook, refresh, quickSave);
     }
     
-    private void addEventHandlers(CollectionOfBooks books) {
+    private void addEventHandlers() {
         
         // med lambda expressions
-        addBook.setOnAction((ActionEvent event) -> controller.addBook());
-        /*addBook.setOnAction(new EventHandler<ActionEvent>() {
-            @Override 
-            public void handle(ActionEvent event) {
-                controller.addBook();
-                System.out.println("ADD IN GRID TEST");
-            }
-        });*/
+        addBook.setOnAction((ActionEvent event) -> {
+            controller.addBook();
+        });
         
         removeBook.setOnAction((ActionEvent event) -> {
             controller.removeBook();

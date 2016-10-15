@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import view.MainView;
 
@@ -26,29 +27,16 @@ public class Main extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-        CollectionOfBooks books = new CollectionOfBooks();
-        Canvas canvas = new Canvas(200, 400);
-        ImageView bookImage = new ImageView();
-        bookImage.setX(300);
-        bookImage.setY(300);
-        StackPane st = new StackPane();
-        HBox imageBox = new HBox();
-        MainView view = new MainView(books, primaryStage, canvas, bookImage, imageBox);
-        
-        //imageBox.setAlignment(Pos.BASELINE_LEFT);
-        imageBox.setPadding(new Insets(10, 10, 5, 10));
-        imageBox.getChildren().setAll(bookImage);
-        imageBox.setMouseTransparent(true);
-        //st.setMouseTransparent(false);
-        st.getChildren().setAll(view, imageBox); 
-        /*Group root = new Group();
-        root.getChildren().add(view);
-        root.getChildren().add(canvas);
-        canvas.blendModeProperty();*/
-
+        StackPane root = new StackPane();
+        VBox imageBox = new VBox();
+        MainView view = new MainView(primaryStage, imageBox);
         
         
-        Scene scene = new Scene(st);
+        
+        root.getChildren().setAll(view, imageBox); 
+        
+        
+        Scene scene = new Scene(root);
         
         primaryStage.setTitle("Library");
         primaryStage.setScene(scene);
@@ -74,7 +62,7 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    readFile(books, stage);
+                    readFile(library, stage);
                 } catch (IOException ex) {
                     System.out.println("shit happned");
                 }

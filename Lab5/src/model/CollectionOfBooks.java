@@ -15,36 +15,36 @@ import java.util.Observable;
  * @version 1.0
  */
 public class CollectionOfBooks extends Observable {
-    //private ArrayList<Book> books;
-    private ArrayList<Book> books;
+    //private ArrayList<Book> library;
+    private ArrayList<Book> library;
     
     /**
      * Constructs a new ArrayList of <code>Book</code> objects.
      */
     public CollectionOfBooks() {
-        books = new ArrayList<Book>();
+        library = new ArrayList<Book>();
 
     }
     
     /**
      * Constructs a ArrayList of <code>Book</code> objects.
-     * @param books The new list of <code>Book</code>.
+     * @param library The new list of <code>Book</code>.
      */
-    public CollectionOfBooks(ArrayList<Book> books) {
-        this.books = books;
+    public CollectionOfBooks(ArrayList<Book> library) {
+        this.library = library;
     }
     
-    public void setBooks(ArrayList<Book> books) {
-        this.books = books;
+    public void setBooks(ArrayList<Book> library) {
+        this.library = library;
         notifyAllObservers();
     }
     
     public ArrayList<Book> getList() {
-        return (ArrayList<Book>) books.clone();
+        return (ArrayList<Book>) library.clone();
     }
     
     public ArrayList<Book> getRealList() {
-        return (ArrayList<Book>) books;
+        return (ArrayList<Book>) library;
     }
     
     /**
@@ -52,7 +52,7 @@ public class CollectionOfBooks extends Observable {
      * @return Returns the size of list.
      */
     public int getSize() {
-        return books.size();
+        return library.size();
     }
     
     /**
@@ -60,7 +60,7 @@ public class CollectionOfBooks extends Observable {
      * @param book The new <code>Book</code> to add to the list.
      */
     public void addBook(Book book) {
-        books.add(book);
+        library.add(book);
         notifyAllObservers();
     }
     
@@ -72,8 +72,8 @@ public class CollectionOfBooks extends Observable {
      * otherwise return <code>false</code>.
      */
     public boolean removeBook(int index) {
-        if (index >= 0 && index < books.size()) {
-            books.remove(index);
+        if (index >= 0 && index < library.size()) {
+            library.remove(index);
             notifyAllObservers();
             return true;
         }
@@ -82,7 +82,7 @@ public class CollectionOfBooks extends Observable {
     }
     
     public boolean removeBook(Book book) {
-        books.remove(book);
+        library.remove(book);
         notifyAllObservers();
         return true;
     }
@@ -95,9 +95,9 @@ public class CollectionOfBooks extends Observable {
      * otherwise return <code>null</code>.
      */
     public Book removeAndGetBook(int index) {
-        if (index >= 0 && index < books.size()) {
+        if (index >= 0 && index < library.size()) {
             notifyAllObservers();
-            return books.remove(index);
+            return library.remove(index);
         }
         else
             return null;
@@ -115,21 +115,21 @@ public class CollectionOfBooks extends Observable {
     
     /**
      * Adds an <code>Author</code> to a <code>Book</code> object.
-     * @param index The index in the list of books that will gain an <code>Author</code>.
+     * @param index The index in the list of library that will gain an <code>Author</code>.
      * @param name The name of the new <code>Author</code>.
      * @return Return <code>true</code> if the <code>Author</code> was successfully added,
      * otherwise return <code>false</code>.
      */
     public boolean addAuthor(int index, String name) {
-        if (index >= 0 && index < books.size()) {
+        if (index >= 0 && index < library.size()) {
             Author tmpAuthor = findAuthor(name);
             if (tmpAuthor != null) {
-                books.get(index).addAuthor(tmpAuthor);
+                library.get(index).addAuthor(tmpAuthor);
                 notifyAllObservers();
                 return true;
             }
             else {
-                books.get(index).addAuthor(name);
+                library.get(index).addAuthor(name);
                 notifyAllObservers();
                 return true;
             }
@@ -139,14 +139,14 @@ public class CollectionOfBooks extends Observable {
     }
     
     /**
-     * Searches all books to find an <code>Author</code> to return.
+     * Searches all library to find an <code>Author</code> to return.
      * @param name The name of the <code>Author</code> to be found.
      * @return If an <code>Author</code> is found return the <code>Author</code>,
      * otherwise return <code>null</code>.
      */
     public Author findAuthor(String name) {
         Author tmpAuthor = new Author(name);
-        for (Book b : books) {
+        for (Book b : library) {
             ArrayList<Author> tmpList = b.getsAuthors();
             for (Author a : tmpList) {
                 if (a.compareTo(tmpAuthor) == 0) {
@@ -158,16 +158,16 @@ public class CollectionOfBooks extends Observable {
     }
     
     /**
-     * Searches for books by its <code>isbn</code>.
+     * Searches for library by its <code>isbn</code>.
      * If a book's <code>isbn</code> contains the search word, the book
      * will be added to a list which will be returned.
      * @param isbn The <code>isbn</code> that is being searched.
-     * @return Returns the list of books that had matching isbns.
+     * @return Returns the list of library that had matching isbns.
      */
     public ArrayList<Book> searchByIsbn(String isbn) {
         ArrayList<Book> tmpBookList = new ArrayList<Book>();
         CharSequence tmpIsbn = isbn.toUpperCase();
-        for (Book b : books) {
+        for (Book b : library) {
             if (b.getIsbn().toUpperCase().contains(tmpIsbn))
                 tmpBookList.add(b);
         }
@@ -176,16 +176,16 @@ public class CollectionOfBooks extends Observable {
     }
     
     /**
-     * Searches for books by its <code>title</code>.
+     * Searches for library by its <code>title</code>.
      * If a book's <code>title</code> contains the search word, the book
      * will be added to a list which will be returned.
      * @param title The <code>title</code> that is being searched.
-     * @return Returns the list of books that had matching titles.
+     * @return Returns the list of library that had matching titles.
      */
     public ArrayList<Book> searchByTitle(String title) {
         ArrayList<Book> tmpBookList = new ArrayList<Book>();
         CharSequence tmpTitle = title.toUpperCase();
-        for (Book b : books) {
+        for (Book b : library) {
             if (b.getTitle().toUpperCase().contains(tmpTitle))
                 tmpBookList.add(b);
         }
@@ -194,17 +194,17 @@ public class CollectionOfBooks extends Observable {
     }
     
     /**
-     * Searches for books by its <code>Author</code>.
+     * Searches for library by its <code>Author</code>.
      * If a book's <code>Author</code> contains the search word, the book
      * will be added to a list which will be returned.
      * @param name The <code>Author</code> that is being searched.
-     * @return Returns the list of books that had matching Authors.
+     * @return Returns the list of library that had matching Authors.
      */
     public ArrayList<Book> searchByAuthor(String name) {
         ArrayList<Book> tmpBookList = new ArrayList<Book>();
         CharSequence tmpName = name.toUpperCase();
         Author tmpAuthor = new Author(name);
-        for (Book b : books) {
+        for (Book b : library) {
             ArrayList<Author> tmpList = b.getsAuthors();
             for (Author a : tmpList) {
                 if (a.getName().toUpperCase().contains(tmpName)) {
@@ -231,7 +231,7 @@ public class CollectionOfBooks extends Observable {
     public String toString() {
         String text = new String("\n");
         int i = 0;
-        for (Book b : books) {
+        for (Book b : library) {
             text += "\nIndex: " + i + "\n" + b.toString() + "\n";
             i += 1;
         }

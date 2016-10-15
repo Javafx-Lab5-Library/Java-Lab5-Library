@@ -8,12 +8,8 @@ package view;
 
 import javafx.animation.AnimationTimer;
 import javafx.geometry.Insets;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.VBox;
 
 /**
  *
@@ -21,94 +17,55 @@ import javafx.scene.paint.Color;
  */
 public class SaveAnimationView {
 
-    private Canvas canvas;
-    private Image image;
-    private ImageView img;
     private ClockTimer timer;
-    private ImageView saveImage;
-    private HBox imageBox;
-    private double x, y, width, height;
+    private ImageView bookImage;
+    private VBox imageBox;
+    private double y, w ;
     
-    public SaveAnimationView(Canvas canvas, ImageView saveImage, HBox imageBox) {
+    public SaveAnimationView(VBox imageBox) {
         timer = new ClockTimer();
-        this.canvas = canvas;
-        this.saveImage = saveImage;
         this.imageBox = imageBox;
-        initAnimation();
+        
+        initAnimation(imageBox);
         
     }
 
-    private void initAnimation() {
-        image = new Image(this.getClass().
+    private void initAnimation(VBox imageBox) {
+        bookImage = new ImageView(this.getClass().
                 getResource("/resources/library-books-t.png").
                 toString());
-        /*width = image.getWidth();
-        height = image.getHeight();
-        img = new ImageView(this.getClass().
-                getResource("library-books.png").
-                toString());
-        Rectangle2D viewportRect = new Rectangle2D(40, 35, 110, 110);
-        img.setViewport(viewportRect);
-        img.setVisible(true);*/
-        //saveImage = new ImageView(this.getClass().
-        //        getResource("library-books.png").
-        //        toString());
-        saveImage.setImage(image);
-        saveImage.setFitWidth(100);
-        saveImage.setPreserveRatio(true);
         
-       // saveImage.setVisible(false);
+        bookImage.setPreserveRatio(true);
+        imageBox.getChildren().setAll(bookImage);
+        imageBox.setMouseTransparent(true);
         
-        x = 0.0;
-        y = 0.0;
-        saveImage.setX(300.0);
-        saveImage.setY(300.0);
-        saveImage.setVisible(false);
-       // canvas.setFocusTraversable(true);
-      //  canvas.requestFocus();
-        
-        //drawImage();
-        
-        //timer.start();
+        bookImage.setVisible(false);
     }
     
     public void startAnimation() {
-        saveImage.setX(300);
-        saveImage.setY(300);
-        x = 30.0;
-        imageBox.setPadding(new Insets(10, 10, 5, x));
+        y = 300.0;
+        w = 100.0;
+        imageBox.setPadding(new Insets(y, 10, 10, 350));
+        bookImage.setFitWidth(w);
 
-        System.out.println("UGH");
-        saveImage.setVisible(true);
+        bookImage.setVisible(true);
         timer.start();
     }
     
-    private void drawImage() {
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.setFill(Color.WHITE);
-        gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        gc.drawImage(image, x, y, width, height);
-        
-    }
-
 
     private class ClockTimer extends AnimationTimer{
 
         @Override
         public void handle(long now) {
-            x += 1;
-            imageBox.setPadding(new Insets(10, 10, 5, x));
-            saveImage.setY(saveImage.getY() - 1);
-            System.out.println(saveImage.getY());
-            //saveImage.notify();
-            //y -= 1.0;
-            //drawImage();
-            if (x > 400) {
+            y -= 3;
+            w -= 1;
+            imageBox.setPadding(new Insets(y, 10, 10, 400));
+            bookImage.setFitWidth(w);
+            if (y < 40) {
                 System.out.println("TIMERRRRRRRRRRRR");
-                saveImage.setVisible(false);
+                bookImage.setVisible(false);
                 timer.stop();
             }
-            //System.out.println("TIMERRRRRRRRRRRR");
         }
     }
     

@@ -9,11 +9,9 @@ import controller.Controller;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -24,16 +22,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.CollectionOfBooks;
 
 /**
  *
  * @author Niklas
  */
 public class AddBookView extends Stage{
-    private CollectionOfBooks books;
     private Controller controller;
-    private Alert alert = new Alert(Alert.AlertType.INFORMATION);
     
     private Label titleL;
     private Label isbnL;
@@ -53,9 +48,7 @@ public class AddBookView extends Stage{
     private HBox hBox;
     private BorderPane border;
     
-    public AddBookView(CollectionOfBooks books, Controller controller) {
-        //super();
-        this.books = books;
+    public AddBookView(Controller controller) {
         this.controller = controller;
         initView();
     }

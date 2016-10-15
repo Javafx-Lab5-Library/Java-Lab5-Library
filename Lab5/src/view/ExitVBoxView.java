@@ -12,7 +12,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
 /**
@@ -56,7 +55,6 @@ public class ExitVBoxView extends VBox {
     }
     
     public void close() {
-        System.out.println("asd");
         stage.close();
     }
 }

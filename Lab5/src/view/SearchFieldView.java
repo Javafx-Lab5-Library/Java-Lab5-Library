@@ -13,25 +13,20 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import model.CollectionOfBooks;
 
 /**
  *
  * @author Niklas
  */
 public class SearchFieldView extends HBox {
-    private CollectionOfBooks books;
     private Controller controller;
     private TextField searchField;
     private ComboBox<String> searchComboBox;
     private Button searchButton;
     
-    public SearchFieldView(CollectionOfBooks books, Controller controller) {
+    public SearchFieldView(Controller controller) {
         super(30);
-        this.books = books;
         this.controller = controller;
-        
-        
         
         initView();
     }
