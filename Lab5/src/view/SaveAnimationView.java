@@ -17,6 +17,7 @@ public class SaveAnimationView {
     private ImageView bookImage;
     private VBox imageBox;
     private double y, w ;
+    private long old;
     
     public SaveAnimationView(VBox imageBox) {
         timer = new ClockTimer();
@@ -39,6 +40,7 @@ public class SaveAnimationView {
     public void startAnimation() {
         y = 300.0;
         w = 100.0;
+        old = 0;
         imageBox.setPadding(new Insets(y, 10, 10, 350));
         bookImage.setFitWidth(w);
 
@@ -50,13 +52,17 @@ public class SaveAnimationView {
     private class ClockTimer extends AnimationTimer{
         @Override
         public void handle(long now) {
-            y -= 3;
-            w -= 1;
-            imageBox.setPadding(new Insets(y, 10, 10, 400));
-            bookImage.setFitWidth(w);
-            if (y < 40) {
-                bookImage.setVisible(false);
-                timer.stop();
+            // normal animation for super high fps
+            if (now > old + 10000000) {
+                old = now;
+                y -= 3;
+                w -= 1;
+                imageBox.setPadding(new Insets(y, 10, 10, 400));
+                bookImage.setFitWidth(w);
+                if (y < 40) {
+                    bookImage.setVisible(false);
+                    timer.stop();
+                }
             }
         }
     }
