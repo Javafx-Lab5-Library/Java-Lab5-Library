@@ -18,10 +18,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-/**
- *
- * @author Niklas
- */
 public class CenterTableView extends TableView implements Observer {
     private CollectionOfBooks library;
     private ObservableList<Book> observBooks;

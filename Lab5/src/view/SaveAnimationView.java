@@ -27,7 +27,6 @@ public class SaveAnimationView {
         this.imageBox = imageBox;
         
         initAnimation(imageBox);
-        
     }
 
     private void initAnimation(VBox imageBox) {
@@ -36,10 +35,9 @@ public class SaveAnimationView {
                 toString());
         
         bookImage.setPreserveRatio(true);
+        bookImage.setVisible(false);
         imageBox.getChildren().setAll(bookImage);
         imageBox.setMouseTransparent(true);
-        
-        bookImage.setVisible(false);
     }
     
     public void startAnimation() {
@@ -54,7 +52,6 @@ public class SaveAnimationView {
     
 
     private class ClockTimer extends AnimationTimer{
-
         @Override
         public void handle(long now) {
             y -= 3;
@@ -62,11 +59,9 @@ public class SaveAnimationView {
             imageBox.setPadding(new Insets(y, 10, 10, 400));
             bookImage.setFitWidth(w);
             if (y < 40) {
-                System.out.println("TIMERRRRRRRRRRRR");
                 bookImage.setVisible(false);
                 timer.stop();
             }
         }
     }
-    
 }

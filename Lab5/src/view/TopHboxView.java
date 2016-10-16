@@ -6,6 +6,7 @@
 package view;
 
 import controller.Controller;
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -63,7 +64,10 @@ public class TopHboxView extends HBox {
         });
         
         quickSave.setOnAction((ActionEvent event) -> {
-            controller.saveToFile();
+            try {
+                controller.saveToFile();
+            } catch (IOException ex) {
+            }
         });
     }
 }

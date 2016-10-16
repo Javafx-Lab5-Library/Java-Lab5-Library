@@ -6,15 +6,12 @@
 package view;
 
 import controller.Controller;
+import java.io.IOException;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
-/**
- *
- * @author Admin
- */
 public class ExitHBoxView extends HBox{
     private Button yesButton;
     private Button noButton;
@@ -44,13 +41,18 @@ public class ExitHBoxView extends HBox{
     }
     
     private void addHandlers(Controller controller) {
-        yesButton.setOnAction(e ->{
-            controller.closeWithSaving();
+        yesButton.setOnAction(event ->{
+            try {
+                controller.closeWithSaving();
+            } 
+            catch (IOException e) {
+
+            }
         });
-        noButton.setOnAction(e ->{
+        noButton.setOnAction(event ->{
             controller.closeWithoutSaving();
         });
-        cancelButton.setOnAction(e ->{
+        cancelButton.setOnAction(event ->{
             controller.closeCanceled();
         });
     }

@@ -14,10 +14,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.layout.VBox;
 
-/**
- *
- * @author Admin
- */
 public class ExitVBoxView extends VBox {
     private Stage stage;
     private String message;

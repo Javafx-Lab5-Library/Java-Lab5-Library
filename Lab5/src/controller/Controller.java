@@ -6,6 +6,7 @@
 package controller;
 
 import externalfile.SaveAndLoad;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.stage.Stage;
@@ -18,10 +19,6 @@ import view.CenterTableView;
 import view.ExitVBoxView;
 import view.FileChooserView;
 
-/**
- *
- * @author Niklas
- */
 public class Controller {
     private CollectionOfBooks library;
     private AddBookView addBookView;
@@ -147,7 +144,7 @@ public class Controller {
         exitView = new ExitVBoxView(this);
     }
     
-    public void closeWithSaving() {
+    public void closeWithSaving() throws IOException {
         saveToFile();
         exitView.close();
         stage.close();
@@ -162,7 +159,7 @@ public class Controller {
         exitView.close();
     }
     
-    public void saveToFile() {
+    public void saveToFile() throws IOException {
         String path = fileChooserView.saveToFile();
         if (path != null) {
             if (saveAndLoad.objectOutput(path, library))
@@ -174,7 +171,7 @@ public class Controller {
             alertView.showAlert("File did not save!");
     }
     
-    public void saveAsToFile() {
+    public void saveAsToFile() throws IOException {
         String path = fileChooserView.saveAsToFile();
         if (path != null) {
             if (saveAndLoad.objectOutput(path, library))
@@ -186,7 +183,7 @@ public class Controller {
             alertView.showAlert("File did not save!");
     }
         
-    public void loadFromFile() {
+    public void loadFromFile() throws IOException {
         String path = fileChooserView.loadFromFile();
         if (path != null) {
             if (saveAndLoad.objectInput(path) != null) {

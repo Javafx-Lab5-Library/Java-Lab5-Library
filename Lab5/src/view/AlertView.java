@@ -7,10 +7,6 @@ package view;
 
 import javafx.scene.control.Alert;
 
-/**
- *
- * @author Niklas
- */
 public class AlertView {
     private Alert alert = new Alert(Alert.AlertType.INFORMATION);
 

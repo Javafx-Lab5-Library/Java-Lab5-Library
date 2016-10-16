@@ -12,7 +12,7 @@ import java.util.Observable;
  * The list can be manipulated by adding and removing <code>Book</code> objects.
  *
  * @author Niklas Ålander
- * @version 1.0
+ * @version 1.1
  */
 public class CollectionOfBooks extends Observable {
     //private ArrayList<Book> library;
@@ -23,17 +23,20 @@ public class CollectionOfBooks extends Observable {
      */
     public CollectionOfBooks() {
         library = new ArrayList<Book>();
-
     }
     
     /**
-     * Constructs a ArrayList of <code>Book</code> objects.
+     * Constructs a <code>ArrayList</code> of <code>Book</code> objects.
      * @param library The new list of <code>Book</code>.
      */
     public CollectionOfBooks(ArrayList<Book> library) {
         this.library = library;
     }
-    
+
+    /**
+     * Changes the <code>CollectionOfBooks</code> <code>books</code>.
+     * @param library The new list of <code>Book</code>.
+     */
     public void setBooks(ArrayList<Book> library) {
         this.library = library;
         notifyAllObservers();
@@ -43,6 +46,11 @@ public class CollectionOfBooks extends Observable {
         return (ArrayList<Book>) library.clone();
     }
     
+
+    /**
+     * Return the list of type <code>Book</code>.
+     * @return Return the list of type <code>Book</code>.
+     */
     public ArrayList<Book> getRealList() {
         return (ArrayList<Book>) library;
     }
@@ -81,6 +89,13 @@ public class CollectionOfBooks extends Observable {
             return false;
     }
     
+
+    /**
+     * Removes a book from the list if given <code>Book</code> is 
+     * within the list and returns <code>true</code>.
+     * @param book The Book that is to be removed.
+     * @return Return <code>true</code> when the book has been removed.
+     */
     public boolean removeBook(Book book) {
         library.remove(book);
         notifyAllObservers();
@@ -217,6 +232,9 @@ public class CollectionOfBooks extends Observable {
         return tmpBookList;
     }
     
+    /**
+     * Notifies observers that a change has happened.
+     */
     public void notifyAllObservers() {
         this.setChanged();
         this.notifyObservers();

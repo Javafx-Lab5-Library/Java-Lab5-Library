@@ -23,10 +23,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-/**
- *
- * @author Niklas
- */
 public class AddBookView extends Stage{
     private Controller controller;
     

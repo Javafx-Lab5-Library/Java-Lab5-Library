@@ -6,6 +6,7 @@
 package view;
 
 import controller.Controller;
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -45,15 +46,24 @@ public class MenuFieldView extends MenuBar{
     
     private void addActionHandlers() {
         save.setOnAction((ActionEvent event) -> {
-            controller.saveToFile();
+            try {
+                controller.saveToFile();
+            } catch (IOException ex) {
+            }
         });
         
         saveAs.setOnAction((ActionEvent event) -> {
-            controller.saveAsToFile();
+            try {
+                controller.saveAsToFile();
+            } catch (IOException ex) {
+            }
         });
         
         load.setOnAction((ActionEvent event) -> {
-            controller.loadFromFile();
+            try {
+                controller.loadFromFile();
+            } catch (IOException ex) {
+            }
         });
         
         exit.setOnAction((ActionEvent event) -> {
