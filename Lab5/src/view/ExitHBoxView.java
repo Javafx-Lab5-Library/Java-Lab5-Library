@@ -33,7 +33,6 @@ public class ExitHBoxView extends HBox{
         yesButton.setPrefWidth(90);
         noButton.setPrefWidth(90);
         cancelButton.setPrefWidth(90);
-        
 
         this.getChildren().addAll(yesButton, noButton, cancelButton);
         
@@ -46,7 +45,6 @@ public class ExitHBoxView extends HBox{
                 controller.closeWithSaving();
             } 
             catch (IOException e) {
-
             }
         });
         noButton.setOnAction(event ->{

@@ -14,10 +14,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 
-/**
- *
- * @author Niklas
- */
 public class SearchFieldView extends HBox {
     private Controller controller;
     private TextField searchField;

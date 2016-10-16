@@ -9,11 +9,6 @@ import java.io.File;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-
-/**
- *
- * @author Niklas
- */
 public class FileChooserView {
     private Stage stage;
     private String path;

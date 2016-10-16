@@ -42,16 +42,11 @@ public class CollectionOfBooks extends Observable {
         notifyAllObservers();
     }
     
-    public ArrayList<Book> getList() {
-        return (ArrayList<Book>) library.clone();
-    }
-    
-
     /**
      * Return the list of type <code>Book</code>.
      * @return Return the list of type <code>Book</code>.
      */
-    public ArrayList<Book> getRealList() {
+    public ArrayList<Book> getList() {
         return (ArrayList<Book>) library;
     }
     

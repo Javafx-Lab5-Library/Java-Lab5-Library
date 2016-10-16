@@ -11,10 +11,6 @@ import javafx.geometry.Insets;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
-/**
- *
- * @author Niklas
- */
 public class SaveAnimationView {
 
     private ClockTimer timer;

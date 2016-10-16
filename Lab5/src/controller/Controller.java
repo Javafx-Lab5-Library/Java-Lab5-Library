@@ -30,7 +30,6 @@ public class Controller {
     private SaveAnimationView saveAniView;
     private AlertView alertView;
     
-    
     public Controller(CollectionOfBooks library, 
             CenterTableView centerTableView, FileChooserView fileChooserView, 
             Stage stage, SaveAnimationView saveAniView) {

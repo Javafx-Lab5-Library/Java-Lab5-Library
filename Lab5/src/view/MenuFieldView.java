@@ -12,10 +12,6 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 
-/**
- *
- * @author Niklas
- */
 public class MenuFieldView extends MenuBar{
     private Controller controller;
     private MenuItem save;

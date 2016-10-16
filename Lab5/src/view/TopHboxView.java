@@ -13,10 +13,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
-/**
- *
- * @author Niklas
- */
 public class TopHboxView extends HBox {
     private Controller controller;
     private Button addBook;

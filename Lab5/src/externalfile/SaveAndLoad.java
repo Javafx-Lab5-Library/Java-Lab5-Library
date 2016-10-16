@@ -59,7 +59,7 @@ public class SaveAndLoad {
     }
     
     public void saveToFile(ObjectOutputStream output, CollectionOfBooks library) throws IOException {
-        output.writeObject(library.getRealList());
+        output.writeObject(library.getList());
     }
     
     

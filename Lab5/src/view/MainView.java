@@ -13,10 +13,6 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-/**
- *
- * @author Niklas
- */
 public class MainView extends VBox {
     private CollectionOfBooks library;
     private Stage stage;
