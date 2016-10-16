@@ -54,6 +54,4 @@ public class ExitHBoxView extends HBox{
             controller.closeCanceled();
         });
     }
-    
-    
 }

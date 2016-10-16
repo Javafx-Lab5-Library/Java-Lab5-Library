@@ -91,5 +91,4 @@ public class CenterTableView extends TableView implements Observer {
     public void update(Observable o, Object o1) {
         refresh();
     }
-    
 }
