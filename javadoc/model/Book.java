@@ -48,7 +48,7 @@ public class Book extends Observable implements Serializable {
     
     /**
      * Changes the <code>Book</code> <code>title</code>.
-     * @param title The <code>Book/code> new <code>title</code>.
+     * @param title The <code>Book</code> new <code>title</code>.
      */
     public void setTitle(String title) {
         this.title = title;
@@ -65,7 +65,7 @@ public class Book extends Observable implements Serializable {
     
     /**
      * Changes the <code>Book</code> <code>isbn</code>.
-     * @param isbn The <code>Book/code> new <code>isbn</code>.
+     * @param isbn The <code>Book</code> new <code>isbn</code>.
      */
     public void setIsbn(String isbn) {
         this.isbn = isbn;
@@ -82,7 +82,7 @@ public class Book extends Observable implements Serializable {
     
     /**
      * Changes the <code>Book</code> <code>edition</code>.
-     * @param edition The <code>Book/code> new <code>edition</code>.
+     * @param edition The <code>Book</code> new <code>edition</code>.
      */
     public void setEdition(int edition) {
         this.edition = edition;
@@ -99,7 +99,7 @@ public class Book extends Observable implements Serializable {
     
     /**
      * Changes the <code>Book</code> <code>price</code>.
-     * @param price The <code>Book/code> new <code>price</code>.
+     * @param price The <code>Book</code> new <code>price</code>.
      */
     public void setPrice(double price) {
         this.price = price;
